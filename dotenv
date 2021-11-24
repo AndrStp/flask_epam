@@ -1,0 +1,11 @@
+# Example of .env file. Don't make any change on this file directly
+# Firstly, run `cp dotenv .env` and then fill in the missing values
+
+#Fill in either 'True' or 'False' (without qoutes) 
+DEBUG=True
+FLASK_APP=app
+
+#Fill in either 'production' or 'development' (without qoutes) 
+FLASK_ENV=development
+
+SECRET_KEY=

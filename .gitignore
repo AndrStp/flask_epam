@@ -1,2 +1,4 @@
 .DS_Store
 env
+.flaskenv
+__pycache__
