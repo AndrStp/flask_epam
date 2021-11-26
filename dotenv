@@ -8,4 +8,12 @@ FLASK_APP=app
 #Fill in either 'production' or 'development' (without qoutes) 
 FLASK_ENV=development
 
-SECRET_KEY=
+# Fill in your DB info
+DB_USER=username
+DB_PASSWORD=password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=postgres
+
+# Set up your secret key
+SECRET_KEY=your_secrert_key
