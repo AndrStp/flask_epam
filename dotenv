@@ -1,11 +1,11 @@
 # Example of .env file. Don't make any change on this file directly
 # Firstly, run `cp dotenv .env` and then fill in the missing values
 
-#Fill in either 'True' or 'False' (without qoutes) 
+# Fill in either 'True' or 'False' (without qoutes) 
 DEBUG=True
 FLASK_APP=app
 
-#Fill in either 'production' or 'development' (without qoutes) 
+# Fill in either 'production' or 'development' (without qoutes) 
 FLASK_ENV=development
 
 # Fill in your DB info
@@ -17,3 +17,10 @@ DB_NAME=postgres
 
 # Set up your secret key
 SECRET_KEY=your_secrert_key
+
+# Fill in mail credentials
+MAIL_SERVER=smtp.googlemail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=example@gmail.com
+MAIL_PASSWORD=password

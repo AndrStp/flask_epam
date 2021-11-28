@@ -23,6 +23,13 @@ class Config:
         f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # MAIL
+    MAIL_SERVER=os.environ.get('MAIL_SERVER')
+    MAIL_PORT=os.environ.get('MAIL_PORT')
+    MAIL_USE_TLS=os.environ.get('MAIL_USE_TLS')
+    MAIL_USERNAME=os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD')
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
