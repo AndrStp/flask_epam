@@ -37,13 +37,13 @@ class User(db.Model, UserMixin):
         raise AttributeError('password is not a readable attribute')
 
     @password.setter
-    def password(self, password) -> None:
+    def password(self, password: str) -> None:
         self.password_hash = generate_password_hash(password)
     
-    def verify_password(self, password) -> bool:
+    def verify_password(self, password: str) -> bool:
         return check_password_hash(self.password_hash, password)
 
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id: int):
     return User.query.get(int(user_id))

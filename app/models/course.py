@@ -12,10 +12,10 @@ class Course(db.Model):
     label = db.Column(db.String(64), index=True, unique=True, nullable=False)
     exam = db.Column(db.Boolean, index=True, nullable=False)
     level = db.Column(db.String(32), index=True, nullable=False)
-    # teacher_id = db.Column(db.Integer, db.Foreignkey('teacher.id'))
-    # students_id = db.relationship('Student',
-    #                               secondary=association_table,
-    #                               back_populates='courses')
+    teacher_id = db.Column(db.Integer, db.Foreignkey('teacher.id'))
+    students_id = db.relationship('Student',
+                                  secondary=association_table,
+                                  back_populates='courses')
 
     def __repr__(self) -> str:
         return f'Course {self.label}'
