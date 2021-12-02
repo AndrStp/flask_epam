@@ -3,3 +3,4 @@ env
 .flaskenv
 __pycache__
 .pytest_cache
+temp_users.json

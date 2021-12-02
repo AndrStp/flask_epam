@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="login-form bg-light mt-4 p-4">
+                <form action="" method="post" class="row g-3">
+                    <img class="mb-4" src="{{ url_for('static', filename='brand_logo.png') }}" alt="brand-logo" height="160">
+                    <h4 class="text-center">Welcome to Community</h4>
+                    
+                    {{ form.hidden_tag() }}
+                    <div class="col-12 mx-auto">
+                        {{ form.email.label }}
+                        {{ form.email(placeholder='Email', class_='form-control') }}
+
+                        {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 mx-auto">
+                        {{ form.username.label }}
+                        {{ form.username(placeholder='Username', class_='form-control') }}
+
+                        {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 mx-auto">
+                        {{ form.password.label }}
+                        {{ form.password(placeholder='Password', class_='form-control') }}
+
+                        {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 mx-auto">
+                        {{ form.password2.label }}
+                        {{ form.password2(placeholder='Repeat Password', class_='form-control') }}
+
+                        {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 mx-auto">
+                        {{ form.submit(class_='btn btn-danger w-100') }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

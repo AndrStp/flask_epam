@@ -1,0 +1,15 @@
+<p>Dear {{ user.username }},</p>
+
+<p>Welcome to EDU!</p>
+
+<p>To confirm your account please click on the following link:</p>
+<a href="{{ url_for('auth.confirm', token=token, _external=True) }}">Click here</a>
+
+<p>
+Sincerely,
+The EDU Team
+</p>
+
+<p>Note: replies to this email address are not monitored.</p>
+
+<p>If you received this link by mistake just ignore it</p>

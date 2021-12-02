@@ -25,18 +25,19 @@ class SignUpForm(FlaskForm):
                                               0,
                                               'Only letters, numbers, dots or '
                                               'underscores')])
-    password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField('Password', validators=[DataRequired(),
+    password = PasswordField('Password', validators=[DataRequired(),
+                                                     Length(6, 32)])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(),
                                                      EqualTo('password',
                                                              message='Passwords must match')])
     submit = SubmitField('Sign Up')
 
-    def validate(field):
+    def validate_email(self, field):
         """Not registered email validation"""
-        if User.query.get(email=field.data).first():
-            raise ValidationError('Email\'s already in use')
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('Email is already in use')
 
-    def validate_username(field: str):
+    def validate_username(self, field):
         """Not used username validation"""
-        if User.query.get(username=field.data).first():
-            raise ValidationError('Username\'s already in use')
+        if User.query.filter_by(username=field.data).first():
+            raise ValidationError('Username is already in use')

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+<div class="container-fluid">
+    <h1 class="py-3">Hello, {{ current_user.username }}</h1>
+    <h3 class="py-3">You have not confirmed your account yet</h3>
+    <p>
+        Please check your mail account you provided in sign up form,
+        there should be a letter with registration details
+    </p>
+    <p class="py-1">
+        Have not received a letter? <a href="{{ url_for('auth.resend_confirmation') }}">Click here</a>
+    </p>
+</div>
+
+{% endblock %}

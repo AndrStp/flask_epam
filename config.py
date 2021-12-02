@@ -27,3 +27,6 @@ class Config:
     MAIL_USE_TLS=environ.get('MAIL_USE_TLS')
     MAIL_USERNAME=environ.get('MAIL_USERNAME')
     MAIL_PASSWORD=environ.get('MAIL_PASSWORD')
+
+    # MISCELLANEOUS
+    FLASK_MAIL_SUBJECT_PREFIX=environ.get('FLASK_MAIL_SUBJECT_PREFIX')
