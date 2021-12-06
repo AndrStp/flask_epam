@@ -1,7 +1,6 @@
 from flask import render_template, url_for, redirect, request, flash
 from flask_login import login_user, current_user, login_required
 from flask_login.utils import logout_user
-from flask_migrate import current
 from .. import db
 from . import auth
 from ..models.user import User
