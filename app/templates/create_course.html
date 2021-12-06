@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+<div class="container" style="width: 60%">
+    <h1 class="text-center py-3">Create new course</h1>
+    <form class="row g-3" method="post">
+        {{ form.hidden_tag() }}
+
+        <div class="form-floating mb-3">
+            {{ form.label(class_='form-control', placeholder='Intro Python') }}
+            {{ form.label.label }}
+
+            {% if form.label.errors %}
+            {% for error in form.label.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-floating mb-3"> <!-- class="form-floating"-->
+            {{ form.small_desc(class_='form-control', rows='3', style='height: 100px', placeholder='Intro Python') }}
+            {{ form.small_desc.label('Course description (max 250 characters)') }}
+            
+            {% if form.small_desc.errors %}
+            {% for error in form.small_desc.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="d-flex">
+            <div class="col-md-6 mb-3">
+                {{ form.exam(class_='form-check-input') }}
+                {{ form.exam.label('Exam?', class_='form-check-label') }}
+            </div>
+            <div class="col-md-6 form-floating">
+                {{ form.level(class_='form-select', id='floatingSelect') }}
+                {{ form.level.label('Difficulty level', for='floatingSelect') }}
+            </div>
+        </div>
+        <div class="d-grid gap-2">
+            {{ form.submit(value='Create Course', class_='btn btn-danger') }}
+        </div>
+    </form>
+</div>
+
+{% endblock %}
