@@ -3,7 +3,12 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from app import db, login_manager
-from . import registrations
+
+
+registrations = db.Table('user-course',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('course_id', db.Integer, db.ForeignKey('courses.id'), primary_key=True)
+)
 
 
 class Role(db.Model):
@@ -27,18 +32,17 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
-
     first_name = db.Column(db.String(64), index=True, nullable=False, default='FName')
     second_name = db.Column(db.String(64), index=True, nullable=False, default='SName')
-
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-
-    courses = db.relationship('Course',
+    courses_student = db.relationship('Course',
                                  secondary=registrations,
                                  backref=db.backref('users', lazy='dynamic'),
                                  lazy='dynamic')
+    courses_author = db.relationship('Course', cascade='all, delete')
+    
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         return f'User: {self.username}'
     
     @property
@@ -50,13 +54,16 @@ class User(db.Model, UserMixin):
         self.password_hash = generate_password_hash(password)
     
     def verify_password(self, password: str) -> bool:
+        """Return True if password is valid, False otherwise"""
         return check_password_hash(self.password_hash, password)
 
     def generate_confirmation_token(self, expiration=3600) -> str:
+        """Return confirmation token"""
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
         return s.dumps({'confirm': self.id}).decode('utf-8')
 
     def confirm(self, token) -> bool:
+        """Return True if token is valid, False otherwise"""
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token.encode('utf-8'))
@@ -70,6 +77,10 @@ class User(db.Model, UserMixin):
         self.confirmed = True
         db.session.add(self)
         return True
+    
+    def enrolled_courses(self) -> list:
+        """Return the list of enrolled courses"""
+        return self.courses_student.all()
 
 
 @login_manager.user_loader
