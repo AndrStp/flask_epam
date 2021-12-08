@@ -42,7 +42,7 @@ class User(db.Model, UserMixin):
     courses_author = db.relationship('Course', cascade='all, delete')
     
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return f'User: {self.username}'
     
     @property

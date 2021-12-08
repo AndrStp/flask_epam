@@ -23,7 +23,7 @@ class Course(db.Model):
     @property
     def author(self) -> str:
         """Return the author username of the Course"""
-        return User.query.get(self.author_id).username
+        return User.query.get(self.author_id)
 
     def is_enrolled(self, user: User) -> bool:
         """Return True if user is enrolled, False otherwise"""
