@@ -40,7 +40,7 @@ def course(course_id: int):
 @main.route('/create_course', methods=['GET', 'POST'])
 @login_required
 def create_course():
-    """Route for creating course"""
+    """Route for creating a course"""
     form = CourseForm()
     if form.validate_on_submit():
         course = Course(label=form.label.data,
@@ -50,23 +50,51 @@ def create_course():
                         author_id=current_user._get_current_object().id)
         db.session.add(course)
         db.session.commit()
-        flash(f'{form.label.data.capitalize()} course has been added successfully',
-              'success')
+        flash(f'{course.label.capitalize()} course has been added', 'success')
         return redirect(url_for('main.course', course_id=course.id))
     return render_template('create_course.html', 
                            title='Create New Course',
                            form=form)
 
 
-@main.route('/delete_course/<course_id>')
+@main.route('/course/edit/<int:course_id>', methods=['GET', 'POST'])
+@login_required
+def edit_course(course_id: int):
+    """Route for editing a course"""
+    course = Course.query.get_or_404(course_id)
+    if course in current_user._get_current_object().courses_author:  # TODO
+        form = CourseForm(course=course)
+        if form.validate_on_submit():
+            course.label = form.label.data
+            course.small_desc = form.small_desc.data
+            course.exam = form.exam.data
+            course.level = form.level.data
+            db.session.add(course)
+            db.session.commit()
+            flash(f'Course {course} has been updated', 'success')
+            return redirect(url_for('main.course', course_id=course.id))
+        form.label.data = course.label
+        form.small_desc.data = course.small_desc
+        form.exam.data = course.exam
+        form.level.data = course.level
+        return render_template('edit_course.html', 
+                               title=f'Edit {course.label} course', 
+                               form=form,
+                               course=course)
+    else:
+        flash('You cannot edit this course', 'danger')
+    return redirect(url_for('main.dashboard'))
+
+
+@main.route('/course/delete/<int:course_id>')
 @login_required
 def delete_course(course_id: int):
-    """Route for deleting course by its id"""
+    """Route for deleting a course"""
     course = Course.query.get_or_404(course_id)
-    if course in current_user._get_current_object().courses_author:
+    if course in current_user._get_current_object().courses_author:  # TODO
         db.session.delete(course)
         db.session.commit()
-        flash(f'Course {course} has been deleted successfully', 'success')
+        flash(f'Course {course} has been updated', 'success')
     else:
         flash('You cannot delete this course', 'danger')
     return redirect(url_for('main.dashboard'))
@@ -79,7 +107,7 @@ def dashboard():
     return render_template('dashboard.html', title='dashboard')
 
 
-@main.route('/enroll/<course_id>')
+@main.route('/enroll/<int:course_id>')
 @login_required
 def enroll(course_id: int):
     """Enroll current user from a given course"""
@@ -91,7 +119,7 @@ def enroll(course_id: int):
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/unenroll/<course_id>') 
+@main.route('/unenroll/<int:course_id>') 
 @login_required
 def unenroll(course_id: int):
     """Unenroll current user from a given course"""
@@ -103,7 +131,7 @@ def unenroll(course_id: int):
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/expell/<user_id>')
+@main.route('/expell/<int:user_id>')
 @login_required
 def expell_user(user_id: int, course_id: int):
     """Expell the user from the given course"""

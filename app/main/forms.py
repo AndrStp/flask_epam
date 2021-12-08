@@ -6,7 +6,7 @@ from app.models.course import Course
 
 
 class CourseForm(FlaskForm):
-    """Form for creating courses"""
+    """Form for creating and editing a course"""
     label = StringField('Course name', validators=[DataRequired(), 
                                                    Length(3, 64)])
     small_desc = TextAreaField('Course description', validators=[DataRequired(),
@@ -17,8 +17,13 @@ class CourseForm(FlaskForm):
                                                      ('A', 'Advanced')])
     submit = SubmitField('Create')
 
+    def __init__(self, course, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.course = course
+
     def validate_label(self, field):
         """Unique course name validation"""
-        if Course.query.filter_by(label=field.data).first():
+        if field.data != self.course.label and \
+            Course.query.filter_by(label=field.data).first():
             raise ValidationError('Course name is already in use')
 
