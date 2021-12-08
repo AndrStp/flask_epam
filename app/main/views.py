@@ -62,7 +62,7 @@ def create_course():
 def edit_course(course_id: int):
     """Route for editing a course"""
     course = Course.query.get_or_404(course_id)
-    if course in current_user._get_current_object().courses_author:  # TODO
+    if course.author == current_user._get_current_object():
         form = CourseForm(course=course)
         if form.validate_on_submit():
             course.label = form.label.data
@@ -82,7 +82,7 @@ def edit_course(course_id: int):
                                form=form,
                                course=course)
     else:
-        flash('You cannot edit this course', 'danger')
+        flash('Denied: You cannot edit this course', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
@@ -91,12 +91,12 @@ def edit_course(course_id: int):
 def delete_course(course_id: int):
     """Route for deleting a course"""
     course = Course.query.get_or_404(course_id)
-    if course in current_user._get_current_object().courses_author:  # TODO
+    if course.author == current_user._get_current_object(): 
         db.session.delete(course)
         db.session.commit()
         flash(f'Course {course} has been updated', 'success')
     else:
-        flash('You cannot delete this course', 'danger')
+        flash('Denied: You cannot delete this course', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
@@ -115,7 +115,7 @@ def enroll(course_id: int):
     if course.enroll(current_user._get_current_object()):
         flash(f'You have enrolled to the {course.label}', 'success')
     else: 
-        flash(f'You seems have already enrolled to the {course.label}', 'danger')
+        flash(f'Denied: You seems have already enrolled to the {course.label}', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
@@ -127,12 +127,20 @@ def unenroll(course_id: int):
     if course.unenroll(current_user._get_current_object()):
         flash(f'You have unenrolled from the {course.label}', 'success')
     else: 
-        flash(f'It seems you are not enrolled to the {course.label}', 'danger')
+        flash(f'Denied: You seems have not enrolled to the {course.label}', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/expell/<int:user_id>')
+@main.route('/expell/<int:user_id>/from/<int:course_id>')
 @login_required
-def expell_user(user_id: int, course_id: int):
+def expell(user_id: int, course_id: int):
     """Expell the user from the given course"""
-    ...
+    user = User.query.get_or_404(user_id)
+    course = Course.query.get_or_404(course_id)
+    if course.author == current_user._get_current_object():
+        course.users.remove(user)
+        db.session.commit()
+        flash(f'{user} has been expelled from the course!', 'success')
+    else:
+        flash('Denied: You are not the author of the course!', 'danger')
+    return redirect(url_for('main.course', course_id=course.id))

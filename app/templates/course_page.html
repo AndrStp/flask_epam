@@ -17,7 +17,7 @@
         <div class="container-fluid d-flex">
             <h3>Enrolled users</h3>
             <div class="ms-auto align-items-center">
-                <a href="#" class="btn btn-success">Disabled</a>
+                <a href="#" class="btn btn-success disabled">Disabled</a>
             </div>
         </div>
         <hr>
@@ -39,7 +39,8 @@
                         <td class="align-middle">{{ user.first_name }}</td>
                         <td class="align-middle">{{ user.second_name }}</td>
                         <td class="align-middle">
-                            <a href="#" class="btn btn-danger">Expell</a>
+                            <a href="{{ url_for('main.expell', user_id=user.id, course_id=course.id) }}" 
+                            class="btn btn-danger">Expell</a>
                         </td>
                     </tr>
                 {% endfor %}
