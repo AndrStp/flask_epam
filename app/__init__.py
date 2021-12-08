@@ -19,8 +19,8 @@ def create_app():
     app.config.from_object(Config)
 
     db.init_app(app)
-    migrate.init_app(app, db)  # directory='app/migrations'
-    from app.models.user import User
+    migrate.init_app(app, db, directory='app/migrations')
+    from .models.user import User
     
     login_manager.init_app(app)
     mail.init_app(app)
