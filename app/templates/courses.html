@@ -26,5 +26,46 @@
             {% endfor %}
             {% endif %}
         </div>
+        
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li {% if not pagination.has_prev %} class="page-item disabled"
+                    {% else %} class="page-item" {% endif %}>
+                    <a class="page-link text-danger" 
+                    href="{% if pagination.has_prev %}
+                    {{ url_for('main.courses', page=pagination.page-1)}}
+                    {% else %}#{% endif %}" 
+                    tabindex="-1">
+                    Previous
+                    </a>
+                </li>
+                {% for page in pagination.iter_pages() %}
+                    <li>
+                    {% if page %}
+                        {% if page == pagination.page %}
+                            <a class="page-link text-danger" 
+                            href="{{ url_for('main.courses', page=page)}}">{{ page }}</a>
+                        {% else %}
+                            <a class="page-link text-danger disabled" 
+                            href="{{ url_for('main.courses', page=page) }}">{{ page }}</a>
+                        {% endif %}
+                    {% else %}
+                        <a class="page-link text-danger disabled" href="#">&hellip;</a>
+                    {% endif %}
+                    </li>
+                {% endfor %}
+                <li {% if not pagination.has_next %} class="page-item disabled"
+                    {% else %} class="page-item" {% endif %}>
+                    <a class="page-link text-danger" 
+                    href="{% if pagination.has_next %}
+                    {{ url_for('main.courses', page=pagination.page+1)}}
+                    {% else %}#{% endif %}" 
+                    tabindex="+1">
+                    Next
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 {% endblock %}
