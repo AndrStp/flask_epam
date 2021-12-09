@@ -16,9 +16,12 @@
     <div class="card-body">
         <div class="container-fluid d-flex">
             <h3>Enrolled users</h3>
+            {% if course not in current_user.enrolled_courses() %}
             <div class="ms-auto align-items-center">
-                <a href="#" class="btn btn-success disabled">Disabled</a>
+                <a href="{{ url_for('main.enroll', course_id=course.id) }}" class="btn btn-success">Enroll</a>
             </div>
+            {% else %}
+            {% endif %}
         </div>
         <hr>
         <table class="table table-striped">
