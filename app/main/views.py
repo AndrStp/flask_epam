@@ -3,8 +3,20 @@ from flask_login import login_required, current_user
 from . import main
 from app import db
 from app.models.course import Course
-from app.models.user import User  # TODO
+from app.models.user import User
 from .forms import CourseForm
+
+
+@main.app_errorhandler(404)
+def page_not_found(e):
+    """App-wide 404 error handling"""
+    return render_template('errors/404.html'), 404
+
+
+@main.app_errorhandler(500)
+def page_not_found(e):
+    """App-wide 500 error handling"""
+    return render_template('errors/500.html'), 500
 
 
 @main.route('/')
