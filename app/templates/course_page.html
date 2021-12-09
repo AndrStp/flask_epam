@@ -16,7 +16,8 @@
     <div class="card-body">
         <div class="container-fluid d-flex">
             <h3>Enrolled users</h3>
-            {% if course not in current_user.enrolled_courses() %}
+            {% if not current_user.is_authenticated 
+                  or course not in current_user.enrolled_courses() %}
             <div class="ms-auto align-items-center">
                 <a href="{{ url_for('main.enroll', course_id=course.id) }}" class="btn btn-success">Enroll</a>
             </div>
@@ -35,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for user in course.users %}
+                {% for user in course_users %}
                     <tr>
                         <th scope="row" class="align-middle">{{ loop.index }}</th>
                         <td class="align-middle">{{ user.username }}</td>

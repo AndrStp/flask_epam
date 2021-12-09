@@ -46,14 +46,18 @@ def courses():
 def course(course_id: int):
     """Route for specific course page"""
     course = Course.query.get_or_404(course_id)
-    return render_template('course_page.html', title=course.label, course=course)
+    course_users = course.users
+    return render_template('course_page.html', 
+                           title=course.label, 
+                           course=course,
+                           course_users=course_users)
 
 
-@main.route('/create_course', methods=['GET', 'POST'])
+@main.route('/course/create', methods=['GET', 'POST'])
 @login_required
 def create_course():
     """Route for creating a course"""
-    form = CourseForm()
+    form = CourseForm(course=None)
     if form.validate_on_submit():
         course = Course(label=form.label.data,
                         exam=form.exam.data,
@@ -116,7 +120,12 @@ def delete_course(course_id: int):
 @login_required
 def dashboard():
     """Route for user dashboard"""
-    return render_template('dashboard.html', title='dashboard')
+    courses_author = current_user.courses_author
+    courses_user = current_user.courses_student.all()
+    return render_template('dashboard.html', 
+                           title='dashboard',
+                           courses_author=courses_author,
+                           courses_user=courses_user)
 
 
 @main.route('/enroll/<int:course_id>')
