@@ -67,8 +67,7 @@ class User(db.Model, UserMixin):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token.encode('utf-8'))
-        except Exception as err:
-            print(err)  # TODO
+        except Exception:  # TODO
             return False
         
         if data.get('confirm') != self.id:
@@ -76,6 +75,7 @@ class User(db.Model, UserMixin):
             
         self.confirmed = True
         db.session.add(self)
+        db.session.commit()
         return True
     
     def enrolled_courses(self) -> list:

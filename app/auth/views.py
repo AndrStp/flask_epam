@@ -1,9 +1,8 @@
-from flask import render_template, url_for, redirect, request, flash
+from flask import render_template, url_for, redirect, request, abort, flash
 from flask_login import login_user, current_user, login_required
 from flask_login.utils import logout_user
-from .. import db
 from . import auth
-from ..models.user import User
+from ..service.service import UserService
 from .forms import LoginForm, SignUpForm
 from .email import send_mail
 
@@ -25,7 +24,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         
-        user = User.query.filter_by(email=form.email.data).first()
+        user = UserService.get_by_field(email=form.email.data)
         if user and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             flash('You have been logged in', 'success')
@@ -52,11 +51,9 @@ def signup():
     """Registration route"""
     form = SignUpForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data)
-        db.session.add(user)
-        db.session.commit()
+        user = UserService.create(email=form.email.data,
+                                  username=form.username.data,
+                                  password=form.password.data)
         token = user.generate_confirmation_token()
         send_mail(user.email, 
                   'Confirmation Letter', 
@@ -75,7 +72,6 @@ def confirm(token: str):
     if current_user.confirmed:
         return redirect(url_for('main.index'))
     if current_user.confirm(token):
-        db.session.commit()
         flash('You have confirmed your account', 'success')
     else:
         flash('The confirmation link is invalid or has expired', 'danger')

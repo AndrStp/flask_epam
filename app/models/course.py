@@ -38,7 +38,7 @@ class Course(db.Model):
             return True
         return False
     
-    def unenroll(self, user: User):
+    def unenroll(self, user: User) -> bool:
         """Unenroll user from a course.
         Return True if user has unenrolled, False otherwise"""
         if self.is_enrolled(user):
@@ -50,3 +50,12 @@ class Course(db.Model):
     def enrolled_students(self) -> list:
         """Return the list of enrolled students"""
         return self.users.all()
+    
+    def expell(self, user: User):
+        """Remove the user from the self.users
+        Return True if removed, False otherwise"""
+        if not self.is_enrolled(user):
+            return False
+        self.users.remove(user)
+        db.session.commit()
+        return True

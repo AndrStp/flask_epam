@@ -12,7 +12,7 @@ class CourseForm(FlaskForm):
     small_desc = TextAreaField('Course description', validators=[DataRequired(),
                                                                  Length(3, 250)])
     exam = BooleanField('Exam')
-    level = SelectField('Difficulty level', choices=[('I','Introductory'),
+    level = SelectField('Difficulty level', choices=[('I', 'Introductory'),
                                                      ('R', 'Regular'),
                                                      ('A', 'Advanced')])
     submit = SubmitField('Create')

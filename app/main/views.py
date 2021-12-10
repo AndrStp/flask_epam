@@ -1,9 +1,8 @@
 from flask import render_template, redirect, url_for, flash, abort, request
 from flask_login import login_required, current_user
 from . import main
-from app import db
-from app.models.course import Course
-from app.models.user import User
+from ..models.course import Course
+from ..service.service import UserService, CourseService
 from .forms import CourseForm
 
 
@@ -45,7 +44,10 @@ def courses():
 @main.route('/course/<int:course_id>')
 def course(course_id: int):
     """Route for specific course page"""
-    course = Course.query.get_or_404(course_id)
+    course = CourseService.get_by_id(course_id)
+    if not course: 
+        abort(404)
+
     course_users = course.users
     return render_template('course_page.html', 
                            title=course.label, 
@@ -59,13 +61,11 @@ def create_course():
     """Route for creating a course"""
     form = CourseForm(course=None)
     if form.validate_on_submit():
-        course = Course(label=form.label.data,
-                        exam=form.exam.data,
-                        level=form.level.data,
-                        small_desc=form.small_desc.data,
-                        author_id=current_user._get_current_object().id)
-        db.session.add(course)
-        db.session.commit()
+        course = CourseService.create(label=form.label.data,
+                                      exam=form.exam.data,
+                                      level=form.level.data,
+                                      small_desc=form.small_desc.data,
+                                      author_id=current_user._get_current_object().id)
         flash(f'{course.label.capitalize()} course has been added', 'success')
         return redirect(url_for('main.course', course_id=course.id))
     return render_template('create_course.html', 
@@ -77,16 +77,18 @@ def create_course():
 @login_required
 def edit_course(course_id: int):
     """Route for editing a course"""
-    course = Course.query.get_or_404(course_id)
+    course = CourseService.get_by_id(course_id)
+    if not course: 
+        abort(404)
+
     if course.author == current_user._get_current_object():
         form = CourseForm(course=course)
         if form.validate_on_submit():
-            course.label = form.label.data
-            course.small_desc = form.small_desc.data
-            course.exam = form.exam.data
-            course.level = form.level.data
-            db.session.add(course)
-            db.session.commit()
+            CourseService.update(course,
+                                 label=form.label.data,
+                                 small_desc=form.small_desc.data,
+                                 exam=form.exam.data,
+                                 level=form.level.data,)
             flash(f'Course {course} has been updated', 'success')
             return redirect(url_for('main.course', course_id=course.id))
         form.label.data = course.label
@@ -106,10 +108,12 @@ def edit_course(course_id: int):
 @login_required
 def delete_course(course_id: int):
     """Route for deleting a course"""
-    course = Course.query.get_or_404(course_id)
+    course = CourseService.get_by_id(course_id)
+    if not course: 
+        abort(404)
+
     if course.author == current_user._get_current_object(): 
-        db.session.delete(course)
-        db.session.commit()
+        CourseService.delete(course)
         flash(f'Course {course} has been updated', 'success')
     else:
         flash('Denied: You cannot delete this course', 'danger')
@@ -132,7 +136,10 @@ def dashboard():
 @login_required
 def enroll(course_id: int):
     """Enroll current user from a given course"""
-    course = Course.query.get_or_404(course_id)
+    course = CourseService.get_by_id(course_id)
+    if not course: 
+        abort(404)
+
     if course.enroll(current_user._get_current_object()):
         flash(f'You have enrolled to the {course.label}', 'success')
     else: 
@@ -144,7 +151,9 @@ def enroll(course_id: int):
 @login_required
 def unenroll(course_id: int):
     """Unenroll current user from a given course"""
-    course = Course.query.get_or_404(course_id)
+    course = CourseService.get_by_id(course_id)
+    if not course: 
+        abort(404)
     if course.unenroll(current_user._get_current_object()):
         flash(f'You have unenrolled from the {course.label}', 'success')
     else: 
@@ -156,12 +165,15 @@ def unenroll(course_id: int):
 @login_required
 def expell(user_id: int, course_id: int):
     """Expell the user from the given course"""
-    user = User.query.get_or_404(user_id)
-    course = Course.query.get_or_404(course_id)
+    user = UserService.get_by_id(user_id)
+    course = CourseService.get_by_id(course_id)
+    if not (course and user): 
+        abort(404)
     if course.author == current_user._get_current_object():
-        course.users.remove(user)
-        db.session.commit()
-        flash(f'{user} has been expelled from the course!', 'success')
+        if course.expell(user):
+            flash(f'{user} has been expelled from the course!', 'success')
+        else:
+            flash(f'{user} is not enrolled to the {course}', 'danger')
     else:
         flash('Denied: You are not the author of the course!', 'danger')
     return redirect(url_for('main.course', course_id=course.id))
