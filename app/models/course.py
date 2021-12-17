@@ -47,8 +47,8 @@ class Course(db.Model):
             return True
         return False
     
-    def enrolled_students(self) -> list:
-        """Return the list of enrolled students"""
+    def enrolled_users(self) -> list:
+        """Return the list of enrolled users"""
         return self.users.all()
     
     def expell(self, user: User):
