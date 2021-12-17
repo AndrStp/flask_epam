@@ -1,10 +1,16 @@
 # Example of .env file. Don't make any change on this file directly
-# Firstly, run `mv .flaskenv.example .flaskenv` and then fill in necessary values
+# Firstly, run `mv .flaskenv.example .env` and then fill in necessary values
 
 # Provide the app name
 FLASK_APP=app
 
-# Fill in either 'production' or 'development'
+# Chose flask configuration ('development', 'testing', 'production'). 
+# Set to 'default'. Default config is 'development'
+FLASK_CONFIG=default
+
+# Fill in either 'production' or 'development'. 
+# If you set FLASK_CONFIG to 'production' change FLASK_ENV to 'production'
+# Otherwise leave without changes
 FLASK_ENV=development
 
 # Set up your secret key

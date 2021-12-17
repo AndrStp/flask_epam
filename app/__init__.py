@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
-from config import Config
+from config import config
 
 
 db = SQLAlchemy()
@@ -14,10 +14,10 @@ migrate = Migrate()
 mail = Mail()
 
 
-def create_app():
+def create_app(config_name: str='default'):
     """Factory pattern"""
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config[config_name])
 
     db.init_app(app)
     migrate.init_app(app, db, directory='app/migrations')
@@ -26,7 +26,6 @@ def create_app():
     login_manager.init_app(app)
     mail.init_app(app)
 
-    # TODO Blueprints
     # main blueprint
     from app.main import main
     app.register_blueprint(main, url_prefix='/')
@@ -37,6 +36,6 @@ def create_app():
 
     # api blueprint
     from app.rest import api
-    app.register_blueprint(api, url_prefix='/api')
+    app.register_blueprint(api, url_prefix='/api/v1')
 
     return app
