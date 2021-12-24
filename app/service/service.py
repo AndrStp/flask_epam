@@ -43,6 +43,7 @@ class UserService:
         Usage: update(user1, username='new_username', first_name='new_fname')"""
         for field, value in kwargs.items():
             setattr(user, field, value)
+        db.session.commit()
 
     @classmethod
     def delete(cls, user: U) -> None:
