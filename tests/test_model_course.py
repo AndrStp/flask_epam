@@ -103,12 +103,12 @@ def test_unenroll_not_erolled_user(init_db):
 def test_enrolled_users(init_db):
     """
     GIVEN a course with user enrolled
-    WHEN calling enrolled_students method
+    WHEN calling enrolled_users method
     THEN the list of enrolled users should be returned
     """
     course = init_db.query(Course).filter_by(label='course1').first()
     user = init_db.query(User).filter_by(username='user2').first()
-    assert course.enrolled_students() == [user]
+    assert course.enrolled_users() == [user]
 
 
 def test_expell_enrolled_user(init_db):
