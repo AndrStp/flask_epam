@@ -13,14 +13,15 @@ class BaseConfig:
     SECRET_KEY = environ.get('SECRET_KEY', 'my_very_secret_key')
 
     # MAIL
-    MAIL_SERVER=environ.get('MAIL_SERVER')
-    MAIL_PORT=environ.get('MAIL_PORT')
-    MAIL_USE_TLS=environ.get('MAIL_USE_TLS')
-    MAIL_USERNAME=environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD=environ.get('MAIL_PASSWORD')
+    MAIL_SERVER = environ.get('MAIL_SERVER')
+    MAIL_PORT = environ.get('MAIL_PORT')
+    MAIL_USE_TLS = environ.get('MAIL_USE_TLS')
+    MAIL_USERNAME = environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
 
     # MISCELLANEOUS
-    FLASK_MAIL_SUBJECT_PREFIX=environ.get('FLASK_MAIL_SUBJECT_PREFIX')
+    FLASK_MAIL_SUBJECT_PREFIX = environ.get('FLASK_MAIL_SUBJECT_PREFIX')
+    JSONIFY_PRETTYPRINT_REGULAR = environ.get('JSONIFY_PRETTYPRINT_REGULAR', True)
 
 
 class DevelopmentConfig(BaseConfig):
@@ -50,12 +51,25 @@ class TestConfig(BaseConfig):
 class ProductionConfig(BaseConfig):
     """Production config class"""
 
+    # DB credentials
+    DB_USER = environ.get('DB_USER')
+    DB_PASSWORD = environ.get('DB_PASSWORD')
+    DB_HOST = environ.get('DB_HOST')
+    DB_PORT = environ.get('DB_PORT')
+    DB_NAME = environ.get('DB_NAME')
+
     # SQLAlchemy config
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(basedir, 'production.db')
+    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(basedir, 'production.db')
+    # SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = \
+        f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # MISCELLANEOUS
+    JSONIFY_PRETTYPRINT_REGULAR = False
 
-config = {
+
+app_config = {
     'development': DevelopmentConfig,
     'testing': TestConfig,
     'production': ProductionConfig,

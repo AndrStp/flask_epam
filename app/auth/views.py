@@ -1,13 +1,14 @@
-from flask import render_template, url_for, redirect, request, abort, flash
+from flask import render_template, url_for, redirect, request, abort, flash, \
+    current_app
 from flask_login import login_user, current_user, login_required
 from flask_login.utils import logout_user
-from . import auth
+from . import auth_bp
 from ..service.service import UserService
 from .forms import LoginForm, SignUpForm
 from .email import send_mail
 
 
-@auth.before_app_request
+@auth_bp.before_app_request
 def before_request():
     """Catches requests of signed up yet uncofirmed users"""
     if current_user.is_authenticated \
@@ -18,7 +19,7 @@ def before_request():
         return redirect(url_for('auth.unconfirmed'))
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     """Login route"""
     form = LoginForm()
@@ -28,6 +29,7 @@ def login():
         if user and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             flash('You have been logged in', 'success')
+            current_app.logger.debug(f'User: \'{user.username}\' has loged in')
 
             next = request.args.get('next')
             if not next or not next.startswith('/'):
@@ -37,16 +39,18 @@ def login():
     return render_template('auth/login.html', title='Sign In', form=form)
 
 
-@auth.route('/logout')
+@auth_bp.route('/logout')
 @login_required
 def logout():
     """Logout route"""
+    user = current_user._get_current_object()
     logout_user()
     flash('You have been logged out', 'success')
+    current_app.logger.debug(f'User: \'{user.username}\' has loged out')
     return redirect(url_for('main.index'))
 
 
-@auth.route('/signup', methods=['GET', 'POST'])
+@auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     """Registration route"""
     form = SignUpForm()
@@ -61,11 +65,12 @@ def signup():
                   user=user,
                   token=token)
         flash('A confirmation letter has been sent to you by email', 'info')
+        current_app.logger.debug(f'User: \'{user.username}\' has signed up')
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html', form=form)
 
 
-@auth.route('/confirm/<token>')
+@auth_bp.route('/confirm/<token>')
 @login_required
 def confirm(token: str):
     """Registration confirmation route"""
@@ -73,12 +78,14 @@ def confirm(token: str):
         return redirect(url_for('main.index'))
     if current_user.confirm(token):
         flash('You have confirmed your account', 'success')
+        current_app.logger.debug(f'User: \'{current_user.username}\' has '\
+            'confirmed mail account')
     else:
         flash('The confirmation link is invalid or has expired', 'danger')
     return redirect(url_for('main.index'))
 
 
-@auth.route('/confirm')
+@auth_bp.route('/confirm')
 @login_required
 def resend_confirmation():
     """Resends registration letter with new token"""
@@ -89,10 +96,12 @@ def resend_confirmation():
               user=current_user,
               token=token)
     flash('A new confirmation letter has been sent to your email', 'info')
+    current_app.logger.debug(f'User: \'{current_user.username}\' has requested '\
+        'new confirmation token')
     return redirect(url_for('main.index'))
 
 
-@auth.route('/unconfirmed')
+@auth_bp.route('/unconfirmed')
 def unconfirmed():
     """Route for signed up yet unconfirmed users"""
     if current_user.is_anonymous or current_user.confirmed:

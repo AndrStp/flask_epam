@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
 
-main = Blueprint('main', __name__)
+main_bp = Blueprint('main', __name__)
 
 
 from . import views, forms

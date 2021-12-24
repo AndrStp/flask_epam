@@ -1,36 +1,45 @@
-from flask import render_template, redirect, url_for, flash, abort, request
+from flask import render_template, redirect, url_for, flash, abort, request, \
+    jsonify, current_app
 from flask_login import login_required, current_user
-from . import main
+from . import main_bp
 from ..models.course import Course
 from ..service.service import UserService, CourseService
 from .forms import CourseForm
 
 
-@main.app_errorhandler(404)
-def page_not_found(e):
-    """App-wide 404 error handling"""
+@main_bp.app_errorhandler(404)
+def not_found(e):
+    """App-wide 404 error handling.
+    Returns json response if request is in json format.
+    Otherwise renders errors/404.html template"""
+    if request.path.startswith('/api/'):
+        return jsonify({'error': 'not found'}), 404
     return render_template('errors/404.html'), 404
 
 
-@main.app_errorhandler(500)
-def page_not_found(e):
-    """App-wide 500 error handling"""
+@main_bp.app_errorhandler(500)
+def internal_error(e):
+    """App-wide 500 error handling.
+    Returns json response if request is in json format.
+    Otherwise renders errors/500.html template"""
+    if request.path.startswith('/api/'):
+        return jsonify({'error': 'not allowed'}), 500
     return render_template('errors/500.html'), 500
 
 
-@main.route('/')
+@main_bp.route('/')
 def index():
     """Route for landing page"""
     return render_template('index.html', title='EDU Landing page')
 
 
-@main.route('/about')
+@main_bp.route('/about')
 def about():
     """Route for about page"""
     return render_template('about.html', title='About')
 
 
-@main.route('/courses')
+@main_bp.route('/courses')
 def courses():
     """Route for all courses availiable"""
     page = request.args.get('page', 1, type=int)
@@ -41,7 +50,7 @@ def courses():
                            courses=courses, pagination=pagination)
 
 
-@main.route('/course/<int:course_id>')
+@main_bp.route('/course/<int:course_id>')
 def course(course_id: int):
     """Route for specific course page"""
     course = CourseService.get_by_id(course_id)
@@ -55,7 +64,7 @@ def course(course_id: int):
                            course_users=course_users)
 
 
-@main.route('/course/create', methods=['GET', 'POST'])
+@main_bp.route('/course/create', methods=['GET', 'POST'])
 @login_required
 def create_course():
     """Route for creating a course"""
@@ -67,13 +76,15 @@ def create_course():
                                       small_desc=form.small_desc.data,
                                       author_id=current_user._get_current_object().id)
         flash(f'{course.label.capitalize()} course has been added', 'success')
+        current_app.logger.debug(f'User: \'{current_user.username}\' '\
+            f'has created the Course: \'{course.label}\'')
         return redirect(url_for('main.course', course_id=course.id))
     return render_template('create_course.html', 
                            title='Create New Course',
                            form=form)
 
 
-@main.route('/course/edit/<int:course_id>', methods=['GET', 'POST'])
+@main_bp.route('/course/edit/<int:course_id>', methods=['GET', 'POST'])
 @login_required
 def edit_course(course_id: int):
     """Route for editing a course"""
@@ -90,6 +101,8 @@ def edit_course(course_id: int):
                                  exam=form.exam.data,
                                  level=form.level.data,)
             flash(f'Course {course} has been updated', 'success')
+            current_app.logger.debug(f'User: \'{current_user.username}\' '\
+                f'has editied the Course: \'{course.label}\'')
             return redirect(url_for('main.course', course_id=course.id))
         form.label.data = course.label
         form.small_desc.data = course.small_desc
@@ -104,7 +117,7 @@ def edit_course(course_id: int):
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/course/delete/<int:course_id>')
+@main_bp.route('/course/delete/<int:course_id>')
 @login_required
 def delete_course(course_id: int):
     """Route for deleting a course"""
@@ -115,12 +128,14 @@ def delete_course(course_id: int):
     if course.author == current_user._get_current_object(): 
         CourseService.delete(course)
         flash(f'Course {course} has been updated', 'success')
+        current_app.logger.debug(f'User: \'{current_user.username}\' '\
+            f'has deleted the Course: \'{course.label}\'')
     else:
         flash('Denied: You cannot delete this course', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/dashboard')
+@main_bp.route('/dashboard')
 @login_required
 def dashboard():
     """Route for user dashboard"""
@@ -132,7 +147,7 @@ def dashboard():
                            courses_user=courses_user)
 
 
-@main.route('/enroll/<int:course_id>')
+@main_bp.route('/enroll/<int:course_id>')
 @login_required
 def enroll(course_id: int):
     """Enroll current user from a given course"""
@@ -142,12 +157,14 @@ def enroll(course_id: int):
 
     if course.enroll(current_user._get_current_object()):
         flash(f'You have enrolled to the {course.label}', 'success')
+        current_app.logger.debug(f'User: \'{current_user.username}\' '\
+            f'has enrolled to the Course: \'{course.label}\'')
     else: 
         flash(f'Denied: You seems have already enrolled to the {course.label}', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/unenroll/<int:course_id>') 
+@main_bp.route('/unenroll/<int:course_id>') 
 @login_required
 def unenroll(course_id: int):
     """Unenroll current user from a given course"""
@@ -156,12 +173,14 @@ def unenroll(course_id: int):
         abort(404)
     if course.unenroll(current_user._get_current_object()):
         flash(f'You have unenrolled from the {course.label}', 'success')
+        current_app.logger.debug(f'User: \'{current_user.username}\' '\
+            f'has unenrolled from the Course: \'{course.label}\'')
     else: 
         flash(f'Denied: You seems have not enrolled to the {course.label}', 'danger')
     return redirect(url_for('main.dashboard'))
 
 
-@main.route('/expell/<int:user_id>/from/<int:course_id>')
+@main_bp.route('/expell/<int:user_id>/from/<int:course_id>')
 @login_required
 def expell(user_id: int, course_id: int):
     """Expell the user from the given course"""
@@ -172,6 +191,8 @@ def expell(user_id: int, course_id: int):
     if course.author == current_user._get_current_object():
         if course.expell(user):
             flash(f'{user} has been expelled from the course!', 'success')
+            current_app.logger.debug(f'User: \'{current_user.username}\' '\
+                f'has been expelled from the Course: \'{course.label}\'')
         else:
             flash(f'{user} is not enrolled to the {course}', 'danger')
     else:

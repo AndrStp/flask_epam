@@ -1,0 +1,190 @@
+[2021-Dec-20 20:46:00] ::INFO:: in werkzeug: _internal:  * Restarting with stat
+[2021-Dec-20 20:46:10] ::INFO:: in werkzeug: _internal:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-20 20:46:10] ::INFO:: in werkzeug: _internal:  * Restarting with stat
+[2021-Dec-20 20:46:26] ::DEBUG:: in app: views: User: 'ast' has unenrolled from the Course: 'Course 103'
+[2021-Dec-20 20:46:34] ::DEBUG:: in app: views: User: 'ast' has enrolled to the Course: 'Course 103'
+[2021-Dec-20 20:48:22] ::INFO:: in werkzeug: _internal:  * Restarting with stat
+[2021-Dec-22 11:01:38] ::DEBUG:: in app: run: The server has started
+[2021-Dec-22 11:01:38] ::INFO:: in werkzeug: _internal:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-22 11:01:38] ::INFO:: in werkzeug: _internal:  * Restarting with stat
+[2021-Dec-22 11:01:38] ::DEBUG:: in app: run: The server has started
+[2021-Dec-22 11:01:38] ::WARNING:: in werkzeug: _internal:  * Debugger is active!
+[2021-Dec-22 11:01:38] ::INFO:: in werkzeug: _internal:  * Debugger PIN: 184-355-021
+[2021-Dec-22 11:02:01] ::INFO:: in werkzeug: _internal:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-22 11:02:01] ::INFO:: in werkzeug: _internal:  * Restarting with stat
+[2021-Dec-22 11:02:29] ::INFO:: in werkzeug: _internal:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-22 11:02:29] ::INFO:: in werkzeug: _internal:  * Restarting with stat
+[2021-Dec-22 11:02:29] ::WARNING:: in werkzeug: _internal:  * Debugger is active!
+[2021-Dec-22 11:02:29] ::INFO:: in werkzeug: _internal:  * Debugger PIN: 184-355-021
+[2021-Dec-22 11:02:36] ::DEBUG:: in app: run: The server has started
+[2021-Dec-22 11:02:36] ::DEBUG:: in app: run: The server has started
+[2021-Dec-22 11:10:22] ::INFO:: in werkzeug: _internal: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-22 11:10:22] ::INFO:: in werkzeug: _internal: _log:  * Restarting with stat
+[2021-Dec-22 11:11:05] ::INFO:: in werkzeug: _internal: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-22 11:11:05] ::INFO:: in werkzeug: _internal: _log:  * Restarting with stat
+[2021-Dec-22 11:11:11] ::DEBUG:: in app: views: unenroll: User: 'ast' has unenrolled from the Course: 'Course 401'
+[2021-Dec-22 11:11:25] ::DEBUG:: in app: views: enroll: User: 'ast' has enrolled to the Course: 'Course 401'
+[2021-Dec-22 11:11:59] ::INFO:: in werkzeug: _internal: _log:  * Restarting with stat
+[2021-Dec-22 11:12:01] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-22 11:12:01] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:12:15] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/main/views.py: unenroll: User: 'ast' has unenrolled from the Course: 'Course 401'
+[2021-Dec-22 11:12:22] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/main/views.py: enroll: User: 'ast' has enrolled to the Course: 'Course 401'
+[2021-Dec-22 11:12:25] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/auth/views.py: logout: User: 'ast' has loged out
+[2021-Dec-22 11:12:38] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/auth/views.py: login: User: 'ast' has loged in
+[2021-Dec-22 11:19:06] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:19:08] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:20:26] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:20:49] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:41:15] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:43:26] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:43:35] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 11:52:33] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 14:26:24] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 14:42:24] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 14:54:45] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 14:55:07] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:09:15] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:24:09] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:24:16] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:26:18] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:34:53] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:36:30] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:37:38] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:38:08] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:42:21] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 16:43:33] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:02:42] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:02:56] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:02:58] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:03:59] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:09:36] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:09:55] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:10:34] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:26:59] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:27:29] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:27:49] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:28:03] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-22 17:28:53] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:04:06] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:04:06] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:06:29] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:06:32] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:06:32] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:06:41] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 1
+[2021-Dec-23 16:07:37] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:07:46] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 10
+[2021-Dec-23 16:07:52] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:11:21] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:11:21] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:11:32] ::WARNING:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Debugger is active!
+[2021-Dec-23 16:11:32] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Debugger PIN: 184-355-021
+[2021-Dec-23 16:11:38] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log: 127.0.0.1 - - [23/Dec/2021 16:11:38] "[33mGET /api/v1/users/ HTTP/1.1[0m" 404 -
+[2021-Dec-23 16:11:38] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log: 127.0.0.1 - - [23/Dec/2021 16:11:38] "[36mGET /static/brand_logo.png HTTP/1.1[0m" 304 -
+[2021-Dec-23 16:12:01] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:12:01] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:12:20] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:12:20] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log: 127.0.0.1 - - [23/Dec/2021 16:12:20] "[35m[1mGET /api/v1/users/7 HTTP/1.1[0m" 500 -
+[2021-Dec-23 16:12:20] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log: 127.0.0.1 - - [23/Dec/2021 16:12:20] "[35m[1mGET /api/v1/users/7 HTTP/1.1[0m" 500 -
+[2021-Dec-23 16:13:16] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:13:16] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:13:24] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:13:29] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:13:57] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:14:41] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:14:43] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:14:45] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:14:45] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:14:47] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 16:15:17] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 8
+[2021-Dec-23 16:15:36] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 9
+[2021-Dec-23 16:23:24] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:23:26] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 9
+[2021-Dec-23 16:23:30] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 9
+[2021-Dec-23 16:44:52] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:49:47] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:49:47] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:49:53] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:49:53] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:51:44] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 16:51:44] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 16:51:45] ::WARNING:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Debugger is active!
+[2021-Dec-23 16:51:45] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Debugger PIN: 184-355-021
+[2021-Dec-23 16:51:54] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log: 127.0.0.1 - - [23/Dec/2021 16:51:54] "[33mGET /api/v1/users/ HTTP/1.1[0m" 404 -
+[2021-Dec-23 16:51:54] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log: 127.0.0.1 - - [23/Dec/2021 16:51:54] "[36mGET /static/brand_logo.png HTTP/1.1[0m" 304 -
+[2021-Dec-23 16:52:17] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Detected change in '/Users/andrey/Projects/flask_epam/app/rest/__init__.py', reloading
+[2021-Dec-23 18:17:36] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-23 18:17:36] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 18:17:49] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving all user
+[2021-Dec-23 18:18:27] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 18:30:45] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:10:56] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 19:11:38] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:11:40] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Making a GET User request
+[2021-Dec-23 19:11:40] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 19:11:44] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Making a GET User request
+[2021-Dec-23 19:11:44] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 19:11:54] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:12:20] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:51:27] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:51:48] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:51:57] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 19:51:58] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving all user
+[2021-Dec-23 19:52:02] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving all user
+[2021-Dec-23 19:52:03] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 19:52:24] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 20:07:50] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 20:07:59] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 20:18:03] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-23 20:21:00] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-23 20:21:33] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: Post args {'username': 'ast', 'email': None, 'first_name': None, 'second_name': None}
+[2021-Dec-24 13:16:20] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:16:22] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: Post args {'username': 'ast', 'email': None, 'first_name': None, 'second_name': None}
+[2021-Dec-24 13:17:02] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: Post args {'username': 'ast', 'email': None, 'first_name': None, 'second_name': None}
+[2021-Dec-24 13:28:21] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:29:15] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: New user has been created (id:16
+[2021-Dec-24 13:33:04] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:33:38] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:33:45] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:35:30] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:35:32] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: Email = None
+[2021-Dec-24 13:36:43] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:36:45] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: Email = None
+[2021-Dec-24 13:36:54] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: Email = None
+[2021-Dec-24 13:36:54] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:43:02] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:43:18] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-24 13:43:18] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:44:07] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 13:44:29] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 14:32:07] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 14:32:54] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 14:33:39] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 7
+[2021-Dec-24 15:32:37] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:34:26] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:36:21] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:36:38] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 15
+[2021-Dec-24 15:37:57] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 16
+[2021-Dec-24 15:45:13] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:48:20] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: post: New user has been created (id:18
+[2021-Dec-24 15:48:43] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 15:48:58] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 11
+[2021-Dec-24 15:49:20] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:49:23] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 11
+[2021-Dec-24 15:49:28] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 15:52:38] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 15:52:53] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:53:19] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-24 15:53:19] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:53:41] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: put: User has been updated (id:18
+[2021-Dec-24 15:54:17] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 15:54:33] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 16:17:11] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 16:17:20] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 16:17:28] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: put: User (id:18) has been updated 
+[2021-Dec-24 16:17:36] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 16:20:04] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 16:20:10] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18
+[2021-Dec-24 16:20:14] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2021-Dec-24 16:20:14] ::INFO:: in werkzeug: /Users/andrey/Projects/flask_epam/env/lib/python3.9/site-packages/werkzeug/_internal.py: _log:  * Restarting with stat
+[2021-Dec-24 16:20:26] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: put: User (id:18) has been updated 
+[2021-Dec-24 16:20:31] ::DEBUG:: in app: /Users/andrey/Projects/flask_epam/app/rest/users.py: get: Retrieving user with id: 18

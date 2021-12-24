@@ -1,6 +1,7 @@
 .DS_Store
 env
-.flaskenv
+.env
 __pycache__
 .pytest_cache
 temp_users.json
+for_tests.py
