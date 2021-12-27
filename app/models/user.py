@@ -82,6 +82,20 @@ class User(db.Model, UserMixin):
         """Return the list of enrolled courses"""
         return self.courses_student.all()
 
+    def to_json(self) -> dict:
+        """Returns json-like representation of User"""
+        json_data = {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'confirmed': self.confirmed,
+            'first_name': self.first_name,
+            'second_name': self.second_name,
+            'courses_author': [course.id for course in self.courses_author],
+            'courses_student': [course.id for course in self.enrolled_courses()],
+        }
+        return json_data
+    
 
 @login_manager.user_loader
 def load_user(user_id: int):

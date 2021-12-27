@@ -14,6 +14,9 @@ class Course(db.Model):
     small_desc = db.Column(db.String(250), index=False)
     date_created = db.Column(db.Date, index=True, 
                              default=datetime.date(datetime.utcnow()))
+    date_updated = db.Column(db.Date, index=True,
+                             default=datetime.date(datetime.utcnow()),
+                             onupdate=datetime.date(datetime.utcnow()))
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
@@ -22,7 +25,7 @@ class Course(db.Model):
     
     @property
     def author(self) -> str:
-        """Return the author username of the Course"""
+        """Return the author of the Course"""
         return User.query.get(self.author_id)
 
     def is_enrolled(self, user: User) -> bool:
@@ -59,3 +62,19 @@ class Course(db.Model):
         self.users.remove(user)
         db.session.commit()
         return True
+    
+    def to_json(self) -> dict:
+        """Returns json-like representation of Course"""
+        json_data = {
+            'id': self.id,
+            'label': self.label,
+            'exam': self.exam,
+            'level': self.level,
+            'small_desc': self.small_desc,
+            'date_created': self.date_created,
+            'date_updated': self.date_updated,
+            'author_id': self.author_id,
+            'users_id': [user.id for user in self.enrolled_users()],
+        }
+        return json_data
+    
