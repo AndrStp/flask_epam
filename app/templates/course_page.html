@@ -10,7 +10,7 @@
             <p class="px-3">{{ course.small_desc }}</p>
         </div>
         <div class="row">
-            <p class="px-3 py-1 text-muted">Created by: {{ course.author }}</p>
+            <p class="px-3 py-1 text-muted">Created by: {{ course.author.username }}</p>
         </div>
     </div>
     <div class="card-body">
@@ -21,7 +21,11 @@
             <div class="ms-auto align-items-center">
                 <a href="{{ url_for('main.enroll', course_id=course.id) }}" class="btn btn-success">Enroll</a>
             </div>
-            {% else %}
+            {% elif current_user.is_authenticated
+                    and course in current_user.enrolled_courses() %}
+            <div class="ms-auto align-items-center">
+                <a href="{{ url_for('main.unenroll', course_id=course.id) }}" class="btn btn-danger">Unenroll</a>
+            </div>
             {% endif %}
         </div>
         <hr>

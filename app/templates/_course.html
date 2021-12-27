@@ -5,10 +5,11 @@
         </a>
         <div class="card-body">
             <h4 class="card-title">{{ course.label }}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Created by: {{ course.author }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Created by: {{ course.author.username }}</h6>
             <p class="card-text">{{ course.small_desc }}</p>
-            <p>Difficulty: {{ course.level }}</p>
-            <p>Created on: {{ course.date_created.strftime('%d %B, %Y') }}</p>
+            <p>Difficulty: {{ course.level }}</p>  <!-- TODO -> display difficulties in readable format-->
+            <p class="mb-1">Created on: {{ course.date_created.strftime('%d %B, %Y') }}</p>
+            <p class=>Last updated on: {{ course.date_updated.strftime('%d %B, %Y') }}</p>
         </div>
         <div class="card-footer align-items-center d-grid">
             {% if not current_user.is_authenticated %}

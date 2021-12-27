@@ -24,11 +24,12 @@
             <thead>
                 <tr>
                     <th class="col-1" scope="col">#</th>
-                    <th class="col-3" scope="col">Label</th>
+                    <th class="col-2" scope="col">Label</th>
                     <th class="col-1" scope="col">Level</th>
                     <th class="col-1" scope="col">Exam</th>
                     <th class="col-1" scope="col">Users</th>
-                    <th class="col-3" scope="col">Creation date</th>
+                    <th class="col-2" scope="col">Created</th>
+                    <th class="col-2" scope="col">Last updated</th>
                     <th class="col-2 text-center" scope="col">Handle</th>
                 </tr>
             </thead>
@@ -43,6 +44,7 @@
                         <td class="align-middle">{{ course.exam }}</td>
                         <td class="align-middle">{{ course.enrolled_users()|length }}</td>
                         <td class="align-middle">{{ course.date_created.strftime('%d %B, %Y') }}</td>
+                        <td class="align-middle">{{ course.date_updated.strftime('%d %B, %Y') }}</td>
                         <td class="align-middle text-end">
                             <a href="{{ url_for('main.edit_course', course_id=course.id) }}" class="btn btn-warning me-md-2">Edit</a>
                             <a href="{{ url_for('main.delete_course', course_id=course.id) }}" class="btn btn-danger">Delete</a>
