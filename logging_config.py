@@ -1,41 +1,3 @@
-# logging_config = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters' : {
-#         'default' : {
-#             'format': '[%(asctime)s] ::%(levelname)s:: in %(name)s: %(module)s: %(message)s',
-#             'datefmt': '%Y-%b-%d %H:%M:%S',
-#         }
-#     },
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#             'level': 'INFO',
-#             'formatter': 'default',
-#             'stream': 'ext://sys.stdout'
-#         },
-#         'file' : {
-#             'class': 'logging.handlers.RotatingFileHandler',
-#             'level': 'INFO',
-#             'formatter': 'default',
-#             'filename': 'logs/log.txt',
-#             'maxBytes': 10485760,
-#             'backupCount': 3,
-#             'encoding': 'utf8'
-#         }
-#     },
-#     'loggers': {
-#         'werkzeug': {
-#             'level': 'DEBUG',
-#             'handlers': ['console', 'file'],
-#         },
-#         'root': {
-#             'level': 'DEBUG',
-#             'handlers': ['console', 'file']
-#         }
-#     }
-# }
-
 logging_config = {
     'version': 1,
     'formatters': {
@@ -61,11 +23,8 @@ logging_config = {
     },
     'loggers': {
         'root': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'handlers': ['wsgi', 'file']
-        },
-        'api': {
-            
         }
     }
 }

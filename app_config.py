@@ -59,8 +59,6 @@ class ProductionConfig(BaseConfig):
     DB_NAME = environ.get('DB_NAME')
 
     # SQLAlchemy config
-    # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(basedir, 'production.db')
-    # SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = \
         f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
