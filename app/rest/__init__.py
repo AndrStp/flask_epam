@@ -6,8 +6,7 @@ api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
 
 
-from . import authentication, users, courses, errors
-# api.add_resource(authentication, 'auth/')
+from . import users, courses
 api.add_resource(users.UserResourse, '/users/', '/users/<int:id>/')
 api.add_resource(courses.CourseResourse, '/courses/', 
                  '/courses/<int:id>/')
