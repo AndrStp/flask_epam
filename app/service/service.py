@@ -12,7 +12,7 @@ class UserService:
     """CRUD operations on User model"""
 
     @classmethod
-    def create(cls, **kwargs) -> None:
+    def create(cls, **kwargs) -> U:
         """Return newly created user"""
         user = User(**kwargs)
         db.session.add(user)
@@ -56,7 +56,7 @@ class CourseService:
     """CRUD operations on Course model"""
     
     @classmethod
-    def create(cls, **kwargs) -> None:
+    def create(cls, **kwargs) -> C:
         """Return newly created course"""
         course = Course(**kwargs)
         db.session.add(course)
@@ -64,12 +64,12 @@ class CourseService:
         return course
     
     @classmethod
-    def get_by_id(cls, course_id: int) -> C:
+    def get_by_id(cls, course_id: int) -> Optional[C]:
         """Return the user object by id, otherwise - None"""
         return Course.query.get(course_id)
 
     @classmethod
-    def get_by_field(cls, **kwargs) -> C:
+    def get_by_field(cls, **kwargs) -> Optional[C]:
         """Return the course object by field
         Usage: get_by_field(label='label')
         Returns course object with field label set to 'label',
@@ -87,7 +87,6 @@ class CourseService:
         Usage: update(course1, label='new_label', exam=False)"""
         for field, value in kwargs.items():
             setattr(course, field, value)
-        db.session.add(course)
         db.session.commit()
 
     @classmethod
