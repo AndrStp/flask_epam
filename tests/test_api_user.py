@@ -16,7 +16,7 @@ def test_get_all_users(init_db, test_client):
 
 def test_get_user_by_id(init_db, test_client):
     """
-    GIVEN a Flask app with '/api/v1/users/' endpoint
+    GIVEN a Flask app with '/api/v1/users/<int:id>' endpoint
     WHEN sending a GET request with 'id'
     THEN response with HTTP status code 200 and data with
     a User (id=id) in json format is returned
@@ -29,7 +29,7 @@ def test_get_user_by_id(init_db, test_client):
 
 def test_get_user_not_exists(init_db, test_client):
     """
-    GIVEN a Flask app with '/api/v1/users/' endpoint
+    GIVEN a Flask app with '/api/v1/users/<int:id>' endpoint
     WHEN sending a GET request with 'id' of non-existent User
     THEN response with HTTP status code 404 and error message
     in json format is returned

@@ -36,7 +36,7 @@ class CourseResourse(Resource):
         current_app.logger.debug(f'Retrieving course with id: {id}')
         return jsonify(course.to_json())
 
-    def post(self, id: int):
+    def post(self, id: int=None):
         """
         CourseResource POST method. Adds a new Course to the database.
         Requires id of the User (author). Returns 201 HTTP status code if success.
@@ -61,7 +61,7 @@ class CourseResourse(Resource):
         small_desc = args['small_desc']
 
         if not (label and level and small_desc):
-            return {'error': 'bad request'}, 400
+            return {'error': 'bad request - not all required fields are provided'}, 400
 
         if CourseService.get_by_field(label=label):
             return {'error': 'bad request - the course with such label already exists'}, 400
@@ -75,7 +75,7 @@ class CourseResourse(Resource):
             f'created by User (id:{id}')
         return {'success': f'Course (id:{course.id}) has been created successfully'}, 201
     
-    def put(self, id: int):
+    def put(self, id: int=None):
         """
         CourseResourse UPDATE method. Updates the Course with course_id,
         and returns 204 HTTP status code if successfully updated
@@ -120,7 +120,7 @@ class CourseResourse(Resource):
             ' updated successfully')
         return '', 204
     
-    def delete(self, id: int):
+    def delete(self, id: int=None):
         """
         Course DELETE method. Removes the Course from the database
         If the Course is not found with the given id, 
@@ -133,7 +133,7 @@ class CourseResourse(Resource):
         If Course id is not provided - 400 HTTP status code
         """
         if not id:
-            return {'error': 'bad request'}, 400
+            return {'error': 'bad request - course id is not provided'}, 400
         
         course = CourseService.get_by_id(id)
         if course is None:
@@ -169,19 +169,17 @@ class CourseEnrollResource(Resource):
         :param user_id: User ID
         :returns: 204 HTTP status code.
         If Course \ User is not found - 404 HTTP status code
-        If course_id \ user_id is not provided - 400 HTTP status code
+        If course_id \ user_id is not provided - 404 HTTP status code
         In case the User is already enrolled to the Course and
         PUT enroll request is sent - 400 HTTP status code is returned.
         The same logic applies to unenroll PUT request for not enrolled one.
         """
-        if not (course_id and user_id):
-            return {'error': 'either one of id\'s or none of id\'s is provided'}, 400
 
         course = CourseService.get_by_id(course_id)
         user = UserService.get_by_id(user_id)
 
         if not (course and user):
-            return {'error': 'either course or user does not exist or none exists'}, 400
+            return {'error': 'either course or user does not exist or none exists'}, 404
 
         request_args = request.path.strip('/').split('/')
         method = request_args[4]
