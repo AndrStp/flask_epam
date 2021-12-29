@@ -47,6 +47,9 @@ class TestConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(basedir, 'tests/test.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # MISCELLANEOUS
+    WTF_CSRF_ENABLED = False
+
 
 class ProductionConfig(BaseConfig):
     """Production config class"""
