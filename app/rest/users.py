@@ -63,7 +63,7 @@ class UserResourse(Resource):
         current_app.logger.debug(f'New user has been created (id:{user.id}')
         return {'success': f'User (id:{user.id}) has been created successfully'}, 201
     
-    def put(self, id: int):
+    def put(self, id: int=None):
         """
         UserResourse UPDATE method. Updates the User,
         and returns the User and 204 HTTP status code.
@@ -83,7 +83,7 @@ class UserResourse(Resource):
         In case not all required fileds provided - 400 HTTP status code
         """
         if not id:
-            return {'error': 'bad request'}, 400
+            return {'error': 'bad request - missing a User id'}, 400
         
         user = UserService.get_by_id(id)
         if user is None:
@@ -110,7 +110,7 @@ class UserResourse(Resource):
         current_app.logger.debug(f'User (id:{user.id}) has been updated ')
         return '', 204
     
-    def delete(self, id: int):
+    def delete(self, id: int=None):
         """
         User DELETE method. Removes the User from the database
         If the User is not found with the given id, 
@@ -123,7 +123,7 @@ class UserResourse(Resource):
         If User id is not provided - 400 HTTP status code
         """
         if not id:
-            return {'error': 'bad request'}, 400
+            return {'error': 'bad request - missing a User id'}, 400
         
         user = UserService.get_by_id(id)
         if user is None:
