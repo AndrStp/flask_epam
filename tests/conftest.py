@@ -5,7 +5,7 @@ from app.models.course import Course
 
 
 @pytest.fixture
-def client():
+def test_client():
     """Create a test client"""
     app = create_app('testing')
     with app.test_client() as test_client:
@@ -14,7 +14,7 @@ def client():
 
 
 @pytest.fixture
-def init_db(client):
+def init_db(test_client):
     """Create the db and table"""
     db.create_all()
 
