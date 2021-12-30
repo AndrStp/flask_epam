@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+<div class="container" style="width: 50%">
+    <h1 class="text-center py-3">Find Courses</h1>
+    <form class="row g-3" method="post">
+        {{ form.hidden_tag() }}
+
+        <div class="form-floating mb-3">
+            {{ form.username(class_='form-control', placeholder='Intro Python') }}
+            {{ form.username.label }}
+
+            {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="d-flex">
+            <div class="form-floating mb-3 flex-fill">
+                <div>
+                    {{ form.start_date.label }}
+                </div>
+                <div>
+                    {{ form.start_date }}
+                </div>
+                {% if form.start_date.errors %}
+                {% for error in form.start_date.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-floating mb-3 flex-fill">
+                <div>
+                    {{ form.end_date.label }}
+                </div>
+                <div>
+                    {{ form.end_date }}
+                </div>
+
+                {% if form.end_date.errors %}
+                {% for error in form.end_date.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="form-floating flex-fill me-2">
+                {{ form.exam(class_='form-select') }}
+                {{ form.exam.label('Exam?', class_='form-check-label') }}
+            </div>
+            <div class="form-floating flex-fill ms-2">
+                {{ form.level(class_='form-select') }}
+                {{ form.level.label('Difficulty level') }}
+            </div>
+        </div>
+        <div class="d-grid gap-2">
+            {{ form.submit(value='Filter Courses', class_='btn btn-danger') }}
+        </div>
+    </form>
+</div>
+
+{% endblock %}

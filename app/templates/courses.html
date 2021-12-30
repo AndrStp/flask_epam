@@ -6,14 +6,21 @@
             <h1 class="text-center py-4">Courses Page</h1> 
         </div>
 
-        {% if current_user.is_authenticated %}
-        <div class="container-fluid d-flex text-white bg-dark bg-gradient">
-            <h3 class="p-3">Manage courses</h3>
-            <div class="p-3 ms-auto align-items-center">
+        <div class="container-fluid d-inline-flex justify-content-around text-white bg-dark bg-gradient">
+            <div class="p-3 flex-grow-1">
+                <h3>Manage courses</h3>
+            </div>
+            <div class="p-3">
+                <a href="{{ url_for('main.search_courses') }}" class="btn btn-warning" >Course Search</a>
+            </div>
+
+            {% if current_user.is_authenticated %}
+            <div class="p-3">
                 <a href="{{ url_for('main.create_course') }}" class="btn btn-success">Add New Course</a>
             </div>
+            {% endif %}
         </div>
-        {% endif %}
+
 
         <div class="row row-cols-1 row-cols-md-4 g-4 py-4">
             {% if not courses %}
@@ -27,6 +34,7 @@
             {% endif %}
         </div>
         
+        {% if pagination %}
         <nav>
             <ul class="pagination justify-content-center">
                 <li {% if not pagination.has_prev %} class="page-item disabled"
@@ -68,4 +76,5 @@
         </nav>
 
     </div>
+    {% endif %}
 {% endblock %}

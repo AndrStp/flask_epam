@@ -2,13 +2,13 @@
 
 {% block page_content %}
 
-<div class="container" style="width: 60%">
+<div class="container" style="width: 50%">
     <h1 class="text-center py-3">Create new course</h1>
     <form class="row g-3" method="post">
         {{ form.hidden_tag() }}
 
         <div class="form-floating mb-3">
-            {{ form.label(class_='form-control', placeholder='Intro Python') }}
+            {{ form.label(class_='form-control', placeholder='Course label', value='Introductory Python 101') }}
             {{ form.label.label }}
 
             {% if form.label.errors %}
@@ -17,7 +17,7 @@
             {% endfor %}
             {% endif %}
         </div>
-        <div class="form-floating mb-3"> <!-- class="form-floating"-->
+        <div class="form-floating mb-3">
             {{ form.small_desc(class_='form-control', rows='3', style='height: 100px', placeholder='Intro Python') }}
             {{ form.small_desc.label('Course description (max 250 characters)') }}
             

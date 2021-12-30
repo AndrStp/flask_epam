@@ -1,10 +1,11 @@
+from datetime import datetime
 from flask import render_template, redirect, url_for, flash, abort, request, \
     jsonify, current_app
 from flask_login import login_required, current_user
 from . import main_bp
 from ..models.course import Course
 from ..service.service import UserService, CourseService
-from .forms import CourseForm
+from .forms import CourseForm, CourseSearchForm
 
 
 @main_bp.app_errorhandler(404)
@@ -22,6 +23,7 @@ def internal_error(e):
     """App-wide 500 error handling.
     Returns json response if request is in json format.
     Otherwise renders errors/500.html template"""
+    current_app.logger.debug('An internal server error occured')
     if request.path.startswith('/api/'):
         return jsonify({'error': 'not allowed'}), 500
     return render_template('errors/500.html'), 500
@@ -48,6 +50,53 @@ def courses():
     courses = pagination.items
     return render_template('courses.html', title=f'Courses - Page{page}', 
                            courses=courses, pagination=pagination)
+
+
+@main_bp.route('/courses/search', methods=['GET', 'POST'])
+def search_courses():
+    """Route for course search form and results"""
+    form = CourseSearchForm()
+    if form.validate_on_submit():
+        filters = {k: v for k, v in form.data.items() 
+                   if v and k not in ['username', 'submit', 'csrf_token', 
+                                      'start_date', 'end_date']}
+
+        if filters.get('exam') == 'true':
+            filters['exam'] = True 
+        elif filters.get('exam') == 'false':
+            filters['exam'] = False
+        
+        if form.username.data:
+            user = UserService.get_by_field(username=form.username.data)
+            if not user:
+                flash(f'There is no user with username: {form.username.data}', 
+                      'danger')
+                return redirect(url_for('main.courses'))
+            filters['author_id'] = user.id
+        
+        start_date = form.start_date.data
+        end_date = form.end_date.data
+        if start_date or end_date:
+            # fill in missing dates
+            if not end_date:
+                end_date = datetime.date(datetime.utcnow())
+            if not start_date:
+                start_date = datetime(2021, 12, 1).date()
+            courses = (Course.query.filter_by(**filters)
+                                .filter(Course.date_created.between(start_date, 
+                                                                    end_date))
+                                .order_by(Course.date_created.desc()).all())
+        else:
+            courses = (Course.query.filter_by(**filters)
+                                .order_by(Course.date_created.desc()).all())
+        if courses:
+            flash(f'{len(courses)} courses has been found', 'success')
+        else:
+            flash(f'No courses has been found', 'danger')
+        return render_template('courses.html', title=f'Filtered Courses', 
+                               courses=courses)
+    return render_template('search_courses.html', title='Search for a course', 
+                           form=form)
 
 
 @main_bp.route('/course/<int:course_id>')
