@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 from app import create_app, db
 from app.models.user import User 
 from app.models.course import Course
@@ -28,10 +29,17 @@ def init_db(test_client):
     db.session.commit()
 
     # create new courses with authors set to user1 and user2
-    course1 = Course(label='course1', exam=False, 
-                     level='I', author_id=user1.id)
-    course2 = Course(label='course2', exam=True, 
-                     level='R', author_id=user2.id)
+    course1 = Course(label='course1', 
+                     exam=False, 
+                     level='I', 
+                     author_id=user1.id,
+                     date_created=datetime(2021, 12, 12).date())
+
+    course2 = Course(label='course2', 
+                     exam=True, 
+                     level='R', 
+                     author_id=user2.id,
+                     date_created=datetime(2021, 12, 13).date())
     db.session.add(course1)
     db.session.add(course2)
 

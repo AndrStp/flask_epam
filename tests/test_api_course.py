@@ -7,7 +7,7 @@ def test_get_all_courses(init_db, test_client):
     GIVEN a Flask app with '/api/v1/courses/' endpoint
     WHEN sending a GET request
     THEN response with HTTP status code 200 and data with
-    all Courses in json format is returned
+    all Courses in json format are returned
     """
     response = test_client.get('/api/v1/courses/')
     json_data = response.get_json()
@@ -20,7 +20,7 @@ def test_get_course_by_id(init_db, test_client):
     GIVEN a Flask app with '/api/v1/courses/' endpoint
     WHEN sending a GET request
     THEN response with HTTP status code 200 and data with
-    a Course (id=id) in json format is returned
+    a Course (id=id) in json format are returned
     """
     response = test_client.get('/api/v1/courses/1/')
     json_data = response.get_json()
@@ -39,6 +39,35 @@ def test_get_course_not_exists(init_db, test_client):
     json_data = response.get_json()
     assert response.status_code == 404
     assert json_data
+
+
+@pytest.mark.parametrize('request_body,course_num',
+                         [
+                            ({
+                                'created_from': '2021-12-12',
+                                'created_to': '2021-12-13'
+                            }, 2),
+                            ({
+                                'created_from': '2021-12-13'
+                            }, 1),
+                            ({
+                                'created_to': '2021-12-12'
+                            }, 1)
+                         ])
+def test_get_course_by_date(init_db, test_client, request_body, course_num):
+    """
+    GIVEN a Flask app with '/api/v1/courses/' endpoint
+    WHEN sending a GET request with a request body that
+    consists of valid either 1) 'created_from' or 'created_to' date
+    parametres or 2) both. Valid params format -> '%Y-%m-%d'
+    THEN response with HTTP status code 200 and data with
+    all Courses that has field 'date_created' within the specified
+    range in json format are returned
+    """
+    response = test_client.get('/api/v1/courses/', json=request_body)
+    json_data = response.get_json()
+    assert response.status_code == 200
+    assert len(json_data.get('courses')) == course_num 
 
 
 def test_post_course(init_db, test_client):

@@ -32,7 +32,7 @@ def test_get_user_not_exists(init_db, test_client):
     GIVEN a Flask app with '/api/v1/users/<int:id>' endpoint
     WHEN sending a GET request with 'id' of non-existent User
     THEN response with HTTP status code 404 and error message
-    in json format is returned
+    in json format are returned
     """
     response = test_client.get('/api/v1/users/4/')
     json_data = response.get_json()
@@ -233,7 +233,7 @@ def test_delete_user(init_db, test_client):
     GIVEN a Flask app with '/api/v1/users/<int:id>' endpoint
     WHEN sending a DELETE request with User id provided
     THEN response with HTTP status code 204 is returned
-    and User is deleted from the db
+    and User is removed from the db
     """
     del_response = test_client.delete('/api/v1/users/1/')
     assert del_response.status_code == 204
