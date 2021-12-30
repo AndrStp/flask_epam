@@ -1,6 +1,8 @@
+from datetime import datetime
 from flask import current_app, jsonify, abort, request
 from flask_restful import Resource, reqparse
 from ..service.service import CourseService, UserService
+from .utils import time_validation
 
 
 parser = reqparse.RequestParser()
@@ -10,6 +12,10 @@ parser.add_argument('level', type=str, choices=['I', 'R', 'A'],
                     help='Course difficulty level. Chose one of the following:'\
                          '"I" - Introductory, "R" - Regular, "A" - Advanced')
 parser.add_argument('small_desc', type=str, help='Small description. Max 250 chars')
+parser.add_argument('created_from', type=str, help='Courses created from X date. ' \
+                                           'Format "%Y-%m-%d"')
+parser.add_argument('created_to', type=str, help='Courses created to X date. ' \
+                                         'Format "%Y-%m-%d"')
 
 
 class CourseResourse(Resource):
@@ -18,16 +24,39 @@ class CourseResourse(Resource):
     def get(self, id: int=None):
         """
         CourseResourse GET method. Retrieves all courses found in the db, 
-        unless the id path parameter is passed. In case the id is provided
-        returns the course with the given id. In case the course with the id 
-        is absent, returns the 404 response
+        unless the 'id' path parameter is passed. Given the 'id' param
+        the course with the given id is returned. 
+        In case the course with the id is absent, returns the 404 response.
+        If the 'id' param is missing but within the GET request
+        'from' or 'to' queries are present, returns the list of courses
+        created from 'from' to 'to' dates. Format: "%Y-%m-%d".
 
         :param id: Course ID to get, optional
         :returns: Course, 200 HTTP status code
+        In case the 'id' of non-existent User is given,
+        return error message and 404 HTTP status code
+        In case either: 1) 'from' or 'to' are provided 
+        in incorrect format, or 2) both are incorrect
+        error message and 400 HTTP status are returned
         """
         if not id:
-            courses = CourseService.get_all()
-            current_app.logger.debug('Retrieving all courses')
+            args = parser.parse_args()
+            date_from = args.get('created_from')
+            date_to = args.get('created_to')
+            
+            if date_from is None and date_to is None:
+                courses = CourseService.get_all()
+                current_app.logger.debug('Retrieving all courses')
+                return jsonify({'courses': [course.to_json() for course in courses]})
+
+            date_from, date_to = time_validation(date_from, date_to)
+            if not (date_from and date_to):
+                current_app.logger.debug('Invalid datetime')
+                return {'error': 'invalid datetime format'}, 400
+
+            courses = CourseService.get_all_by_date(date_from, date_to)
+            current_app.logger.debug('Retrieving all courses from ' \
+                                        f'{str(date_from)} to {str(date_to)}')
             return jsonify({'courses': [course.to_json() for course in courses]})
 
         course = CourseService.get_by_id(id)
@@ -63,7 +92,7 @@ class CourseResourse(Resource):
         if not (label and level and small_desc):
             return {'error': 'bad request - not all required fields are provided'}, 400
 
-        if CourseService.get_by_field(label=label):
+        if CourseService.get_course_by_field(label=label):
             return {'error': 'bad request - the course with such label already exists'}, 400
 
         course = CourseService.create(label=label, 
@@ -108,7 +137,8 @@ class CourseResourse(Resource):
         if not (label and level and small_desc):
             return {'error': 'bad request - not all required fields are provided'}, 400
 
-        if label != course.label and CourseService.get_by_field(label=label):
+        if label != course.label \
+                    and CourseService.get_course_by_field(label=label):
             return {'error': 'bad request - the course with such label already exists'}, 400
 
         CourseService.update(course,

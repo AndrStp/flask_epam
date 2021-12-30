@@ -8,7 +8,8 @@ api = Api(api_bp)
 
 from . import users, courses
 api.add_resource(users.UserResourse, '/users/', '/users/<int:id>/')
-api.add_resource(courses.CourseResourse, '/courses/', 
+api.add_resource(courses.CourseResourse, 
+                 '/courses/', 
                  '/courses/<int:id>/')
 api.add_resource(courses.CourseEnrollResource, 
                  '/courses/<int:course_id>/enroll/<int:user_id>/',
