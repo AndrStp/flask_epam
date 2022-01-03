@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request, abort, flash, \
+from flask import render_template, url_for, redirect, request, flash, \
     current_app
 from flask_login import login_user, current_user, login_required
 from flask_login.utils import logout_user
@@ -31,10 +31,10 @@ def login():
             flash('You have been logged in', 'success')
             current_app.logger.debug(f'User: \'{user.username}\' has loged in')
 
-            next = request.args.get('next')
-            if not next or not next.startswith('/'):
-                next = url_for('main.dashboard')
-            return redirect(next)
+            next_ = request.args.get('next')
+            if not next_ or not next_.startswith('/'):
+                next_ = url_for('main.dashboard')
+            return redirect(next_)
         flash('Invalid credentials. Please check your email and password', 'danger')
     return render_template('auth/login.html', title='Sign In', form=form)
 
@@ -59,8 +59,8 @@ def signup():
                                   username=form.username.data,
                                   password=form.password.data)
         token = user.generate_confirmation_token()
-        send_mail(user.email, 
-                  'Confirmation Letter', 
+        send_mail(user.email,
+                  'Confirmation Letter',
                   'auth/confirm',
                   user=user,
                   token=token)
@@ -90,7 +90,7 @@ def confirm(token: str):
 def resend_confirmation():
     """Resends registration letter with new token"""
     token = current_user.generate_confirmation_token()
-    send_mail(current_user.email, 
+    send_mail(current_user.email,
               'Confirm your Account',
               'auth/confirm',
               user=current_user,

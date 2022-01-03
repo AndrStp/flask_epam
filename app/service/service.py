@@ -1,8 +1,8 @@
 from datetime import datetime
+from typing import TypeVar, Optional
 from app import db
 from ..models.user import User
 from ..models.course import Course
-from typing import TypeVar, Optional
 
 
 U = TypeVar('U', bound='User')

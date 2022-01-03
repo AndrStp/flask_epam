@@ -1,4 +1,3 @@
-from datetime import datetime
 from flask import current_app, jsonify, abort, request
 from flask_restful import Resource, reqparse
 from ..service.service import CourseService, UserService
@@ -8,7 +7,7 @@ from .utils import time_validation
 parser = reqparse.RequestParser()
 parser.add_argument('label', type=str, help='Course label')
 parser.add_argument('exam', type=bool, help='Exam required?')
-parser.add_argument('level', type=str, choices=['I', 'R', 'A'], 
+parser.add_argument('level', type=str, choices=['I', 'R', 'A'],
                     help='Course difficulty level. Chose one of the following:'\
                          '"I" - Introductory, "R" - Regular, "A" - Advanced')
 parser.add_argument('small_desc', type=str, help='Small description. Max 250 chars')
@@ -21,7 +20,7 @@ parser.add_argument('created_to', type=str, help='Courses created to X date. ' \
 class CourseResourse(Resource):
     """CourseResourse"""
 
-    def get(self, id: int=None):
+    def get(self, id_: int=None):
         """
         CourseResourse GET method. Retrieves all courses found in the db, 
         unless the 'id' path parameter is passed. Given the 'id' param
@@ -39,7 +38,7 @@ class CourseResourse(Resource):
         in incorrect format, or 2) both are incorrect
         error message and 400 HTTP status are returned
         """
-        if not id:
+        if not id_:
             args = parser.parse_args()
             date_from = args.get('created_from')
             date_to = args.get('created_to')
@@ -59,13 +58,13 @@ class CourseResourse(Resource):
                                         f'{str(date_from)} to {str(date_to)}')
             return jsonify({'courses': [course.to_json() for course in courses]})
 
-        course = CourseService.get_by_id(id)
+        course = CourseService.get_by_id(id_)
         if course is None:
             abort(404)
-        current_app.logger.debug(f'Retrieving course with id: {id}')
+        current_app.logger.debug(f'Retrieving course with id: {id_}')
         return jsonify(course.to_json())
 
-    def post(self, id: int=None):
+    def post(self, id_: int=None):
         """
         CourseResource POST method. Adds a new Course to the database.
         Requires id of the User (author). Returns 201 HTTP status code if success.
@@ -76,10 +75,10 @@ class CourseResourse(Resource):
         :returns: 201 HTTP status code if success.
         otherwise - 400 HTTP status code
         """
-        if not id:
+        if not id_:
             return {'error': 'id is not given'}, 400
 
-        user = UserService.get_by_id(id)
+        user = UserService.get_by_id(id_)
         if not user:
             return {'error': 'user with such id does not exist'}, 400
 
@@ -99,12 +98,12 @@ class CourseResourse(Resource):
                                       level=level,
                                       exam=exam,
                                       small_desc=small_desc,
-                                      author_id=id)
+                                      author_id=id_)
         current_app.logger.debug(f'New course (id:{course.id}) has been ' \
-            f'created by User (id:{id}')
+            f'created by User (id:{id_}')
         return {'success': f'Course (id:{course.id}) has been created successfully'}, 201
     
-    def put(self, id: int=None):
+    def put(self, id_: int=None):
         """
         CourseResourse UPDATE method. Updates the Course with course_id,
         and returns 204 HTTP status code if successfully updated
@@ -114,17 +113,17 @@ class CourseResourse(Resource):
         In case the PUT request contains 'label' field 
         that is already taken by another Course, 400 HTTP status code is returned
 
-        :param id: Course ID
+        :param id_: Course ID
         :returns: 204 HTTP status code.
         If Course is not found - 404 HTTP status code
         If Course id is not provided - 400 HTTP status code
         In case the 'label' field in the PUT request contains data that 
         is already taken by another Course - 400 HTTP status code
         """
-        if not id:
+        if not id_:
             return {'error': 'id is not given'}, 400
 
-        course = CourseService.get_by_id(id)
+        course = CourseService.get_by_id(id_)
         if not course:
             return {'error': 'course with such id does not exist'}, 400
 
@@ -150,7 +149,7 @@ class CourseResourse(Resource):
             ' updated successfully')
         return '', 204
     
-    def delete(self, id: int=None):
+    def delete(self, id_: int=None):
         """
         Course DELETE method. Removes the Course from the database
         If the Course is not found with the given id, 
@@ -162,10 +161,10 @@ class CourseResourse(Resource):
         If Course is not found - 404 HTTP status code
         If Course id is not provided - 400 HTTP status code
         """
-        if not id:
+        if not id_:
             return {'error': 'bad request - course id is not provided'}, 400
         
-        course = CourseService.get_by_id(id)
+        course = CourseService.get_by_id(id_)
         if course is None:
             abort(404)
         
@@ -184,11 +183,11 @@ class CourseEnrollResource(Resource):
     """
 
     def put(self, course_id: int, user_id: int):
-        """CourseResourse UPDATE method. Enrolls \ Unerolls the User with
+        """CourseResourse UPDATE method. Enrolls or Unerolls the User with
         user_id from the Course with course_id, and 
         returns 204 HTTP status code if successfully updated.
         If either the Course or User is not found with the given 
-        course_id \ user_id 404 HTTP status code is returned
+        course_id or user_id 404 HTTP status code is returned
         If either course_id or user_id is not provided, 
         400 HTTP status code is returned
         In case the User is already enrolled to the Course and
@@ -198,8 +197,8 @@ class CourseEnrollResource(Resource):
         :param course_id: Course ID
         :param user_id: User ID
         :returns: 204 HTTP status code.
-        If Course \ User is not found - 404 HTTP status code
-        If course_id \ user_id is not provided - 404 HTTP status code
+        If Course or User is not found - 404 HTTP status code
+        If course_id or user_id is not provided - 404 HTTP status code
         In case the User is already enrolled to the Course and
         PUT enroll request is sent - 400 HTTP status code is returned.
         The same logic applies to unenroll PUT request for not enrolled one.
@@ -222,7 +221,7 @@ class CourseEnrollResource(Resource):
                 f'enrolled to the Course (id:{course.id})')
             return '', 204
 
-        elif method == 'unenroll':
+        if method == 'unenroll':
             if not course.is_enrolled(user):
                 return {'error': f'User (id:{user.id}) is not enrolled'}, 400
             

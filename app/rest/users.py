@@ -15,31 +15,31 @@ parser.add_argument('confirmed', type=bool, help='Email confirmation status')
 class UserResourse(Resource):
     """UserResource"""
 
-    def get(self, id: int=None):
+    def get(self, id_: int=None):
         """
-        UserResourse GET method. Retrieves all users found in the db, 
-        unless the id path parameter is passed. In case the id is provided
-        returns the user with the given id. In case the user with the id 
+        UserResourse GET method. Retrieves all users found in the db,
+        unless the id_ path parameter is passed. In case the id_ is provided
+        returns the user with the given id_. In case the user with the id_
         is absent, returns the 404 response
 
-        :param id: User ID to get, optional
+        :param id_: User ID to get, optional
         :returns: User, 200 HTTP status code
         """
-        if not id:
+        if not id_:
             users = UserService.get_all()
             current_app.logger.debug('Retrieving all users')
             return jsonify({'users': [user.to_json() for user in users]})
 
-        user = UserService.get_by_id(id)
+        user = UserService.get_by_id(id_)
         if user is None:
             abort(404)
-        current_app.logger.debug(f'Retrieving user with id: {id}')
+        current_app.logger.debug(f'Retrieving user with id: {id_}')
         return jsonify(user.to_json())
 
     def post(self):
         """
         UserResource POST method. Adds a new User to the database.
-        Returns 400 HTTP status code in case the POST request misses 
+        Returns 400 HTTP status code in case the POST request misses
         the following fields: 'username', 'email', 'password'
 
         :returns: 201 HTTP status code if success,
@@ -57,24 +57,24 @@ class UserResourse(Resource):
         if UserService.get_by_field(email=email):
             return {'error': 'bad request - such email is already taken'}, 400
 
-        user = UserService.create(username=username, 
-                                  email=email, 
+        user = UserService.create(username=username,
+                                  email=email,
                                   password=password)
         current_app.logger.debug(f'New user has been created (id:{user.id}')
         return {'success': f'User (id:{user.id}) has been created successfully'}, 201
     
-    def put(self, id: int=None):
+    def put(self, id_: int=None):
         """
         UserResourse UPDATE method. Updates the User,
         and returns the User and 204 HTTP status code.
         Requires 'username', 'confirmed', 'first_name' and 'second_name' fileds.
-        If the User is not found with the given id, 
+        If the User is not found with the given id,
         404 HTTP status code is returned
         If User id is not provided, 400 HTTP status code is returned
-        In case the PUT request contains 'username' field that 
+        In case the PUT request contains 'username' field that
         is already taken by another user 400 HTTP status code is returned
 
-        :param id: User ID
+        :param id_: User ID
         :returns: 204 HTTP status code.
         If User is not found - 404 HTTP status code
         If User id is not provided - 400 HTTP status code
@@ -82,10 +82,10 @@ class UserResourse(Resource):
         data that is already taken by another User - 400 HTTP status code
         In case not all required fileds provided - 400 HTTP status code
         """
-        if not id:
+        if not id_:
             return {'error': 'bad request - missing a User id'}, 400
         
-        user = UserService.get_by_id(id)
+        user = UserService.get_by_id(id_)
         if user is None:
             abort(404)
 
@@ -103,17 +103,17 @@ class UserResourse(Resource):
             return {'error': 'bad request - such username is already taken'}, 400
 
         UserService.update(user,
-                           username=username, 
+                           username=username,
                            confirmed=confirmed,
                            first_name=first_name,
                            second_name=second_name)
         current_app.logger.debug(f'User (id:{user.id}) has been updated ')
         return '', 204
     
-    def delete(self, id: int=None):
+    def delete(self, id_: int=None):
         """
         User DELETE method. Removes the User from the database
-        If the User is not found with the given id, 
+        If the User is not found with the given id,
         404 HTTP status code is returned
         If User id is not provided, 400 HTTP status code is returned
 
@@ -122,10 +122,10 @@ class UserResourse(Resource):
         If User is not found - 404 HTTP status code
         If User id is not provided - 400 HTTP status code
         """
-        if not id:
+        if not id_:
             return {'error': 'bad request - missing a User id'}, 400
         
-        user = UserService.get_by_id(id)
+        user = UserService.get_by_id(id_)
         if user is None:
             abort(404)
 

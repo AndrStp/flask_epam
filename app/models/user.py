@@ -40,7 +40,6 @@ class User(db.Model, UserMixin):
                                  backref=db.backref('users', lazy='dynamic'),
                                  lazy='dynamic')
     courses_author = db.relationship('Course', cascade='all, delete')
-    
 
     def __repr__(self) -> str:
         return f'User: {self.username}'

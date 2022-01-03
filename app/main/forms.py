@@ -8,7 +8,7 @@ from app.models.course import Course
 
 class CourseForm(FlaskForm):
     """Form for creating and editing a course"""
-    label = StringField('Course label', validators=[DataRequired(), 
+    label = StringField('Course label', validators=[DataRequired(),
                                                    Length(3, 64)])
     small_desc = TextAreaField('Course description', validators=[DataRequired(),
                                                                  Length(3, 250)])

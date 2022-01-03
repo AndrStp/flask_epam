@@ -48,7 +48,7 @@ def courses():
     pagination = Course.query.order_by(Course.date_created.desc()).paginate(
         page, per_page=8, error_out=False)
     courses = pagination.items
-    return render_template('courses.html', title=f'Courses - Page{page}', 
+    return render_template('courses.html', title=f'Courses - Page{page}',
                            courses=courses, pagination=pagination)
 
 
@@ -57,8 +57,8 @@ def search_courses():
     """Route for course search form and results"""
     form = CourseSearchForm()
     if form.validate_on_submit():
-        filters = {k: v for k, v in form.data.items() 
-                   if v and k not in ['username', 'submit', 'csrf_token', 
+        filters = {k: v for k, v in form.data.items()
+                   if v and k not in ['username', 'submit', 'csrf_token',
                                       'start_date', 'end_date']}
 
         if filters.get('exam') == 'true':
@@ -69,7 +69,7 @@ def search_courses():
         if form.username.data:
             user = UserService.get_by_field(username=form.username.data)
             if not user:
-                flash(f'There is no user with username: {form.username.data}', 
+                flash(f'There is no user with username: {form.username.data}',
                       'danger')
                 return redirect(url_for('main.courses'))
             filters['author_id'] = user.id
@@ -83,7 +83,7 @@ def search_courses():
             if not start_date:
                 start_date = datetime(2021, 12, 1).date()
             courses = (Course.query.filter_by(**filters)
-                                .filter(Course.date_created.between(start_date, 
+                                .filter(Course.date_created.between(start_date,
                                                                     end_date))
                                 .order_by(Course.date_created.desc()).all())
         else:
@@ -93,9 +93,9 @@ def search_courses():
             flash(f'{len(courses)} courses has been found', 'success')
         else:
             flash(f'No courses has been found', 'danger')
-        return render_template('courses.html', title=f'Filtered Courses', 
+        return render_template('courses.html', title=f'Filtered Courses',
                                courses=courses)
-    return render_template('search_courses.html', title='Search for a course', 
+    return render_template('search_courses.html', title='Search for a course',
                            form=form)
 
 
@@ -103,12 +103,12 @@ def search_courses():
 def course(course_id: int):
     """Route for specific course page"""
     course = CourseService.get_by_id(course_id)
-    if not course: 
+    if not course:
         abort(404)
 
     course_users = course.users
-    return render_template('course_page.html', 
-                           title=course.label, 
+    return render_template('course_page.html',
+                           title=course.label,
                            course=course,
                            course_users=course_users)
 
@@ -138,7 +138,7 @@ def create_course():
 def edit_course(course_id: int):
     """Route for editing a course"""
     course = CourseService.get_by_id(course_id)
-    if not course: 
+    if not course:
         abort(404)
 
     if course.author == current_user._get_current_object():
@@ -171,10 +171,10 @@ def edit_course(course_id: int):
 def delete_course(course_id: int):
     """Route for deleting a course"""
     course = CourseService.get_by_id(course_id)
-    if not course: 
+    if not course:
         abort(404)
 
-    if course.author == current_user._get_current_object(): 
+    if course.author == current_user._get_current_object():
         CourseService.delete(course)
         flash(f'Course {course} has been updated', 'success')
         current_app.logger.debug(f'User: \'{current_user.username}\' '\
@@ -190,7 +190,7 @@ def dashboard():
     """Route for user dashboard"""
     courses_author = current_user.courses_author
     courses_user = current_user.courses_student.all()
-    return render_template('dashboard.html', 
+    return render_template('dashboard.html',
                            title='dashboard',
                            courses_author=courses_author,
                            courses_user=courses_user)
@@ -201,7 +201,7 @@ def dashboard():
 def enroll(course_id: int):
     """Enroll current user from a given course"""
     course = CourseService.get_by_id(course_id)
-    if not course: 
+    if not course:
         abort(404)
 
     if course.enroll(current_user._get_current_object()):
@@ -218,7 +218,7 @@ def enroll(course_id: int):
 def unenroll(course_id: int):
     """Unenroll current user from a given course"""
     course = CourseService.get_by_id(course_id)
-    if not course: 
+    if not course:
         abort(404)
     if course.unenroll(current_user._get_current_object()):
         flash(f'You have unenrolled from the {course.label}', 'success')
