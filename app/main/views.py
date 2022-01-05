@@ -92,8 +92,8 @@ def search_courses():
         if courses:
             flash(f'{len(courses)} courses has been found', 'success')
         else:
-            flash(f'No courses has been found', 'danger')
-        return render_template('courses.html', title=f'Filtered Courses',
+            flash('No courses has been found', 'danger')
+        return render_template('courses.html', title='Filtered Courses',
                                courses=courses)
     return render_template('search_courses.html', title='Search for a course',
                            form=form)

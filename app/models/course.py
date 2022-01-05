@@ -19,7 +19,6 @@ class Course(db.Model):
                              onupdate=datetime.date(datetime.utcnow()))
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-
     def __repr__(self) -> str:
         return f'Course: {self.label}'
     
