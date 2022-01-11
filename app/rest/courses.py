@@ -20,7 +20,7 @@ parser.add_argument('created_to', type=str, help='Courses created to X date. ' \
 class CourseResourse(Resource):
     """CourseResourse"""
 
-    def get(self, id_: int=None):
+    def get(self, id: int=None):
         """
         CourseResourse GET method. Retrieves all courses found in the db, 
         unless the 'id' path parameter is passed. Given the 'id' param
@@ -38,7 +38,7 @@ class CourseResourse(Resource):
         in incorrect format, or 2) both are incorrect
         error message and 400 HTTP status are returned
         """
-        if not id_:
+        if not id:
             args = parser.parse_args()
             date_from = args.get('created_from')
             date_to = args.get('created_to')
@@ -58,13 +58,13 @@ class CourseResourse(Resource):
                                         f'{str(date_from)} to {str(date_to)}')
             return jsonify({'courses': [course.to_json() for course in courses]})
 
-        course = CourseService.get_by_id(id_)
+        course = CourseService.get_by_id(id)
         if course is None:
             abort(404)
-        current_app.logger.debug(f'Retrieving course with id: {id_}')
+        current_app.logger.debug(f'Retrieving course with id: {id}')
         return jsonify(course.to_json())
 
-    def post(self, id_: int=None):
+    def post(self, id: int=None):
         """
         CourseResource POST method. Adds a new Course to the database.
         Requires id of the User (author). Returns 201 HTTP status code if success.
@@ -75,10 +75,10 @@ class CourseResourse(Resource):
         :returns: 201 HTTP status code if success.
         otherwise - 400 HTTP status code
         """
-        if not id_:
+        if not id:
             return {'error': 'id is not given'}, 400
 
-        user = UserService.get_by_id(id_)
+        user = UserService.get_by_id(id)
         if not user:
             return {'error': 'user with such id does not exist'}, 400
 
@@ -98,12 +98,12 @@ class CourseResourse(Resource):
                                       level=level,
                                       exam=exam,
                                       small_desc=small_desc,
-                                      author_id=id_)
+                                      author_id=id)
         current_app.logger.debug(f'New course (id:{course.id}) has been ' \
-            f'created by User (id:{id_}')
+            f'created by User (id:{id}')
         return {'success': f'Course (id:{course.id}) has been created successfully'}, 201
     
-    def put(self, id_: int=None):
+    def put(self, id: int=None):
         """
         CourseResourse UPDATE method. Updates the Course with course_id,
         and returns 204 HTTP status code if successfully updated
@@ -113,17 +113,17 @@ class CourseResourse(Resource):
         In case the PUT request contains 'label' field 
         that is already taken by another Course, 400 HTTP status code is returned
 
-        :param id_: Course ID
+        :param id: Course ID
         :returns: 204 HTTP status code.
         If Course is not found - 404 HTTP status code
         If Course id is not provided - 400 HTTP status code
         In case the 'label' field in the PUT request contains data that 
         is already taken by another Course - 400 HTTP status code
         """
-        if not id_:
+        if not id:
             return {'error': 'id is not given'}, 400
 
-        course = CourseService.get_by_id(id_)
+        course = CourseService.get_by_id(id)
         if not course:
             return {'error': 'course with such id does not exist'}, 400
 
@@ -149,7 +149,7 @@ class CourseResourse(Resource):
             ' updated successfully')
         return '', 204
     
-    def delete(self, id_: int=None):
+    def delete(self, id: int=None):
         """
         Course DELETE method. Removes the Course from the database
         If the Course is not found with the given id, 
@@ -161,10 +161,10 @@ class CourseResourse(Resource):
         If Course is not found - 404 HTTP status code
         If Course id is not provided - 400 HTTP status code
         """
-        if not id_:
+        if not id:
             return {'error': 'bad request - course id is not provided'}, 400
         
-        course = CourseService.get_by_id(id_)
+        course = CourseService.get_by_id(id)
         if course is None:
             abort(404)
         
