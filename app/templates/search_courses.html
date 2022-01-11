@@ -2,7 +2,7 @@
 
 {% block page_content %}
 
-<div class="container" style="width: 50%">
+<div class="container w-50">
     <h1 class="text-center py-3">Find Courses</h1>
     <form class="row g-3" method="post">
         {{ form.hidden_tag() }}
@@ -18,25 +18,22 @@
             {% endif %}
         </div>
         <div class="d-flex">
-            <div class="form-floating mb-3 flex-fill">
+            <div class="form-floating flex-fill me-2">
                 <div>
                     {{ form.start_date.label }}
+                    {{ form.start_date(class_='form-control') }}
                 </div>
-                <div>
-                    {{ form.start_date }}
-                </div>
+
                 {% if form.start_date.errors %}
                 {% for error in form.start_date.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
                 {% endif %}
             </div>
-            <div class="form-floating mb-3 flex-fill">
+            <div class="form-floating flex-fill ms-2">
                 <div>
                     {{ form.end_date.label }}
-                </div>
-                <div>
-                    {{ form.end_date }}
+                    {{ form.end_date(class_='form-control') }}
                 </div>
 
                 {% if form.end_date.errors %}
