@@ -16,6 +16,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'email-validator==1.1.3',
         'Flask==2.0.2',
         'Flask-Login==0.5.0',
         'Flask-Mail==0.9.1',
