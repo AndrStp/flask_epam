@@ -32,8 +32,8 @@ class CourseForm(FlaskForm):
 class CourseSearchForm(FlaskForm):
     """Form for searching"""
     username = StringField('Author name', validators=[Optional(), Length(3, 64)])
-    start_date = DateField('Created starting from', validators=[Optional()])
-    end_date = DateField('Created no later than', validators=[Optional()])
+    start_date = DateField('Created From', validators=[Optional()])
+    end_date = DateField('Created To', validators=[Optional()])
     exam = SelectField('Exam', choices=[('', 'All courses'),
                                         ('true', 'With exam'),
                                         ('false', 'No exam')])
