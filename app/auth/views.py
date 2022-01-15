@@ -28,7 +28,7 @@ def login():
         user = UserService.get_by_field(email=form.email.data)
         if user and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            flash('You have been logged in', 'success')
+            flash('You have logged in', 'success')
             current_app.logger.debug(f'User: \'{user.username}\' has loged in')
 
             next_ = request.args.get('next')
@@ -45,7 +45,7 @@ def logout():
     """Logout route"""
     user = current_user._get_current_object()
     logout_user()
-    flash('You have been logged out', 'success')
+    flash('You have logged out', 'success')
     current_app.logger.debug(f'User: \'{user.username}\' has loged out')
     return redirect(url_for('main.index'))
 

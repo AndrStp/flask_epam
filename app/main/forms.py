@@ -24,9 +24,13 @@ class CourseForm(FlaskForm):
 
     def validate_label(self, field):
         """Unique course name validation"""
-        if field.data != self.course.label and \
-            Course.query.filter_by(label=field.data).first():
-            raise ValidationError('Course name is already in use')
+        if self.course:
+            if field.data != self.course.label and \
+                Course.query.filter_by(label=field.data).first():
+                raise ValidationError('Course name is already in use')
+        else:
+            if Course.query.filter_by(label=field.data).first():
+                raise ValidationError('Course name is already in use')
 
 
 class CourseSearchForm(FlaskForm):
