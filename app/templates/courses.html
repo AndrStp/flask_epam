@@ -11,12 +11,16 @@
                 <h3>Manage courses</h3>
             </div>
             <div class="p-3">
-                <a href="{{ url_for('main.search_courses') }}" class="btn btn-warning" >Course Search</a>
+                <a href="{{ url_for('main.search_courses') }}" class="btn btn-warning" >
+                    <i class="bi bi-search pe-1"></i>Course Search
+                </a>
             </div>
 
             {% if current_user.is_authenticated %}
             <div class="p-3">
-                <a href="{{ url_for('main.create_course') }}" class="btn btn-success">Add New Course</a>
+                <a href="{{ url_for('main.create_course') }}" class="btn btn-success">
+                    <i class="bi bi-plus-lg pe-1"></i>Add New Course
+                </a>
             </div>
             {% endif %}
         </div>
