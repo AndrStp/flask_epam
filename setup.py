@@ -29,5 +29,6 @@ setup(
         'python-dotenv==0.19.2',
         'SQLAlchemy==1.4.27',
         'pylint==2.12.2',
+        'gunicorn=20.1.0',
     ]
 )

@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   web:
-    image: flask_app_v3
+    image: flask_app_gunicorn
     build: ./
-    command: python run.py
-    container_name: flask_app
+    command: gunicorn --bind 0.0.0.0:5000 -w 3 run:app
+    container_name: flask-app
     volumes:
       - ./:/usr/src/flask_app/
+    networks:
+      - flask_network
     ports:
       - 5000:5000
     env_file:
@@ -27,8 +29,13 @@ services:
       POSTGRES_DB: flask-dev
     ports:
       - 5432:5432
+    networks:
+      - flask_network
 
 volumes:
   pg_data:
     external: true
     name: pg_data
+  
+networks:
+  flask_network:

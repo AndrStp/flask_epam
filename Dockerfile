@@ -31,5 +31,3 @@ RUN adduser -u 8877 newuser -D && chown -R newuser /usr/src/flask_app/
 EXPOSE 5000
 
 USER newuser
-
-CMD [ "python", "run.py" ]
