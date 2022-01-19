@@ -6,9 +6,6 @@ enrolling to them.
 It is a final project for EPAM Python Autumn 2021 Course. 
 For more detailed information visit documentation/SRS.md
 
-# Project structure
-
-
 # How to start
 
 ## Download the project
