@@ -17,12 +17,15 @@ FLASK_ENV=development
 SECRET_KEY=your_secrert_key
 
 # Fill in your DB info
+# Project uses PostgreSQL db by default.
 DB_USER=username
 DB_PASSWORD=password
-# if you are using the db running in the docker container provide the below
+
+# In case  you are using the db running in the docker container provide the below
 field with the name of the service. For default project docker configuration
 use "db" as the DB_HOST. See docker-compose.yaml file.
 DB_HOST=localhost
+
 DB_PORT=5432
 DB_NAME=postgres
 
